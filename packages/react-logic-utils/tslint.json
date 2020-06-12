@@ -1,0 +1,26 @@
+{
+  "extends": ["tslint:recommended"],
+  "linterOptions": {
+    "exclude": ["config/**/*.js", "src/**/*.js*", "node_modules/**/*.ts"]
+  },
+  "rules": {
+    "radix": false,
+    "no-string-literal": false,
+    "interface-name": false,
+    "jsx-no-multiline-js": false,
+    "trailing-comma": false,
+    "quotemark": false,
+    "semicolon": false,
+    "ordered-imports": false,
+    "jsx-boolean-value": false,
+    "jsx-no-lambda": false,
+    "member-access": false,
+    "object-literal-sort-keys": false,
+    "interface-over-type-literal": false,
+    "no-namespace": false,
+    "no-shadowed-variable": false,
+    "no-console": false,
+    "arrow-parens": false,
+    "no-unused-expression": false
+  }
+}

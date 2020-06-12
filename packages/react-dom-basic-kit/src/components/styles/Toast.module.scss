@@ -1,0 +1,35 @@
+@import '~scss-basic-kit/lib/common.scss';
+
+.toast-layer {
+  @include l-position(fixed, 0 0 0 0);
+  @include l-flex(column, center);
+  align-items: center;
+  padding-top: 60vh;
+  pointer-events: none;
+  touch-action: none;
+  user-select: none;
+  z-index: 7000;
+}
+
+.toast {
+  background-color: rgba(black, 0.6);
+  border-radius: 4px;
+  color: white;
+  margin-bottom: 8px;
+  padding: 8px 16px;
+  text-align: center;
+  transition: all 0.3s;
+
+  opacity: 0;
+  transform: translateY(60px);
+  position: absolute;
+
+  &.shown {
+    opacity: 1;
+    transform: translateY(0);
+    position: static;
+  }
+  &.hidden {
+    transform: translateY(-60px);
+  }
+}

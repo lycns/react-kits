@@ -1,0 +1,89 @@
+{
+  "name": "react-dom-basic-kit",
+  "version": "0.1.0",
+  "description": "react dom basic kit",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "start-storybook -p 6006",
+    "build": "webpack",
+    "build:force": "rm -rf .tsbuildcache && npm run build",
+    "build:prod": "npm run build && npm publish",
+    "format": "npm run format:tslint && npm run format:prettier",
+    "format:tslint": "tslint --fix --config ./tslint.json 'src/**/*.{ts,tsx}'",
+    "format:prettier": "prettier --config .prettierrc --write 'src/**/*.{js,jsx,ts,tsx,scss}'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lynnkoo/react-dom-basic-kit.git"
+  },
+  "keywords": [
+    "react-dom-basic-kit",
+    "react-dom",
+    "react"
+  ],
+  "author": "lynnkoo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lynnkoo/react-dom-basic-kit/issues"
+  },
+  "homepage": "https://github.com/lynnkoo/react-dom-basic-kit#readme",
+  "dependencies": {
+    "basic-kit-browser": "^0.0.1",
+    "classnames": "^2.2.6",
+    "immer": "^5.3.6",
+    "qs": "^6.9.4",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-router-dom": "^5.1.2",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@storybook/addon-info": "^5.2.8",
+    "@storybook/react": "^5.2.8",
+    "@types/classnames": "^2.2.9",
+    "@types/node": "^12.7.8",
+    "@types/qs": "^6.9.3",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-router-dom": "^5.1.0",
+    "@types/uuid": "^3.4.5",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "husky": "^3.0.7",
+    "lint-staged": "^9.4.0",
+    "node-sass": "^4.13.0",
+    "prettier": "^1.18.2",
+    "react-dev-utils": "^10.0.0",
+    "react-docgen-typescript-loader": "^3.6.0",
+    "sass-loader": "^8.0.0",
+    "scss-basic-kit": "^0.0.2",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^1.0.0",
+    "tslint": "^5.11.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,css,scss,json,html}": [
+      "npm run format",
+      "git add"
+    ],
+    "yarn.lock": [
+      "git rm --cached"
+    ]
+  },
+  "gitHead": "20090c232fd0c9e032a185c14eaef7d224742bb2"
+}

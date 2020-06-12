@@ -1,0 +1,19 @@
+@import '~scss-basic-kit/lib/common.scss';
+
+.modal {
+  @include l-position(absolute, 0 x 0 x);
+  transition: background-color 0.3s, opacity 0.3s;
+  width: 100%;
+  z-index: 5000;
+  opacity: 0;
+  &.shown {
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 1;
+  }
+  &.no-bg {
+    background-color: transparent;
+  }
+  &.no-anim {
+    transition-duration: 0.01s;
+  }
+}

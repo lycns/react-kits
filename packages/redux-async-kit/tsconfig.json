@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": ".tsbuildcache",
+    "rootDir": "src",
+    "outDir": "lib"
+  },
+  "extends": "../../tsconfig",
+  "exclude": ["node_modules", "lib"],
+  "include": ["src"]
+}
