@@ -8,10 +8,7 @@
     "start": "start-storybook -p 6006",
     "build": "tsc",
     "build:force": "rm -rf .tsbuildcache && npm run build",
-    "build:prod": "npm run build && npm version patch && npm publish",
-    "format": "npm run format:tslint",
-    "format:tslint": "tslint --fix --config ./tslint.json 'src/**/*.{ts,tsx}'",
-    "format:prettier": "prettier --config .prettierrc --write 'src/**/*.{js,jsx,ts,tsx,scss}'"
+    "build:prod": "npm run build && npm version patch && npm publish"
   },
   "repository": {
     "type": "git",
@@ -34,19 +31,9 @@
     "tslint": "^5.11.0",
     "typescript": "^3.2.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,md,css,scss,html}": [
-      "npm run format",
-      "git add"
-    ]
-  },
   "dependencies": {
     "basic-kit-js": "^0.0.1",
+    "immer": "^7.0.1",
     "react": "^16.13.1"
   },
   "gitHead": "20090c232fd0c9e032a185c14eaef7d224742bb2"

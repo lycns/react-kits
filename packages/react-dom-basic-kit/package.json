@@ -5,12 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "start-storybook -p 6006",
-    "build": "webpack",
-    "build:force": "rm -rf .tsbuildcache && npm run build",
-    "build:prod": "npm run build && npm publish",
-    "format": "npm run format:tslint && npm run format:prettier",
-    "format:tslint": "tslint --fix --config ./tslint.json 'src/**/*.{ts,tsx}'",
-    "format:prettier": "prettier --config .prettierrc --write 'src/**/*.{js,jsx,ts,tsx,scss}'"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -34,6 +29,7 @@
     "qs": "^6.9.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-logic-utils": "^0.0.2",
     "react-router-dom": "^5.1.2",
     "uuid": "^3.3.3"
   },
@@ -70,20 +66,5 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
     "webpack-node-externals": "^1.7.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,md,css,scss,json,html}": [
-      "npm run format",
-      "git add"
-    ],
-    "yarn.lock": [
-      "git rm --cached"
-    ]
-  },
-  "gitHead": "20090c232fd0c9e032a185c14eaef7d224742bb2"
+  }
 }

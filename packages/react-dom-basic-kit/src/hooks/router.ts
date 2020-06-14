@@ -5,4 +5,3 @@ export function useUrlQuery() {
     const { search } = useLocation()
     return qs.parse(search, { ignoreQueryPrefix: true })
 }
-  

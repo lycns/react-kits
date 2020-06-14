@@ -1,6 +1,6 @@
 import './index.scss'
 
-export * from './containers/Container'
+export * from './containers/AppContainer'
 export * from './containers/ModalLayer'
 export * from './components/Popup'
 export * from './components/Form'

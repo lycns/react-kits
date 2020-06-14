@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createReducer, IReducerMap } from '../utils/react'
+import { createReducer, IReducerMap } from 'react-logic-utils'
 
 const FORM_INITIAL_STATE = 'FORM_INITIAL_STATE'
 const FORM_UPDATE_DATA = 'FORM_UPDATE_DATA'
@@ -14,13 +14,16 @@ export type IFormData = { [key: string]: string }
 export type IFormChecks = { [key: string]: number }
 export type IFormTests = { [key: string]: RegExp[] }
 export type IFormErrors = { [key: string]: string }
+export type IActionStatus = {
+  submit: boolean
+}
 
 type IFormState = {
   data: IFormData
   checks: IFormChecks
   tests: IFormTests
   errors: IFormErrors
-  doSubmit: boolean | Boolean // tslint:disable-line
+  actions: IActionStatus
 }
 
 type IFormActions = {
@@ -48,30 +51,9 @@ const initialState: IFormState = {
   checks: {},
   tests: {},
   errors: {},
-  doSubmit: false,
-}
-
-function asFormDataCheck(value: string = '', test: RegExp[]): number {
-  if (!test) {
-    return -1
+  actions: {
+    submit: false,
   }
-  for (let i = 0; i < test.length; i++) {
-    const exp = test[i]
-    if (value.match(exp)) {
-      return i
-    }
-  }
-  return -1
-}
-
-function asFormChecks(data: IFormData, tests: IFormTests): IFormChecks {
-  const checks: IFormChecks = {}
-  for (const name of Object.keys(data)) {
-    const test = tests[name]
-    const value = data[name] || ''
-    checks[name] = asFormDataCheck(value, test)
-  }
-  return checks
 }
 
 const reducerMap: IReducerMap<IFormState> = (state) => ({
@@ -81,8 +63,10 @@ const reducerMap: IReducerMap<IFormState> = (state) => ({
   },
   [FORM_SUBMIT_DATA]: () => {
     state.checks = asFormChecks(state.data, state.tests)
-    // tslint:disable-next-line
-    state.doSubmit = new Boolean(true) // 为了更新 doSubmit 的动作，取值时注意使用 valueOf
+    state.actions = {
+      ...state.actions,
+      submit: true,
+    }
   },
   [FORM_CHECK_DATA]: ({ name }) => {
     state.checks[name] = asFormDataCheck(state.data[name], state.tests[name])
@@ -114,11 +98,13 @@ export type IFormContext = Omit<IFormState, 'tests'> & IFormActions
 
 export function useInitFormContext(): IFormContext {
   const [state, dispatch] = React.useReducer(appReducer, initialState)
-  return {
+  const data = {
     data: state.data,
     checks: state.checks,
     errors: state.errors,
-    doSubmit: state.doSubmit,
+    actions: state.actions,
+  }
+  const actions = {
     initial: (name: string) => dispatch(initial(name)),
     update: (data: IFormData) => dispatch(update(data)),
     updateTest: (test: IFormTests) => dispatch(updateTest(test)),
@@ -128,4 +114,28 @@ export function useInitFormContext(): IFormContext {
     clearTips: (name: string) => dispatch(clearTips(name)),
     clearError: (name: string) => dispatch(clearError(name)),
   }
+  return { ...data, ...actions }
+}
+
+function asFormDataCheck(value: string = '', test: RegExp[]): number {
+  if (!test) {
+    return -1
+  }
+  for (let i = 0; i < test.length; i++) {
+    const exp = test[i]
+    if (value.match(exp)) {
+      return i
+    }
+  }
+  return -1
+}
+
+function asFormChecks(data: IFormData, tests: IFormTests): IFormChecks {
+  const checks: IFormChecks = {}
+  for (const name of Object.keys(data)) {
+    const test = tests[name]
+    const value = data[name] || ''
+    checks[name] = asFormDataCheck(value, test)
+  }
+  return checks
 }

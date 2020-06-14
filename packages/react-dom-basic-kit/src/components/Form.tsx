@@ -24,8 +24,8 @@ export function enhanceFormComponent<T>(
 ): React.ComponentType<IFormComponentProps & T> {
   return (props) => {
     const { onSubmit = () => {} } = props
-    const formContext = useInitFormContext()
-    const { data, checks, errors, doSubmit } = formContext
+    const context = useInitFormContext()
+    const { data, checks, errors, actions } = context
     React.useEffect(() => {
       let approved = true
       for (const name of Object.keys(checks)) {
@@ -43,12 +43,12 @@ export function enhanceFormComponent<T>(
       if (!approved) {
         return
       }
-      if (doSubmit.valueOf()) {
+      if (actions.submit) {
         onSubmit(data)
       }
-    }, [doSubmit])
+    }, [actions])
     return (
-      <FormContext.Provider value={formContext}>
+      <FormContext.Provider value={context}>
         <WrappedComponent {...props} />
       </FormContext.Provider>
     )

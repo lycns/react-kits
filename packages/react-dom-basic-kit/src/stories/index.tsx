@@ -1,7 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { ToggleModal, ToggleToast } from './Container'
+import { ToggleToast } from './Container'
 import FormTest from './Form'
+import { ToggleModal } from './Modal'
 
 storiesOf('Container', module)
   .add('toggle toast', () => <ToggleToast />)

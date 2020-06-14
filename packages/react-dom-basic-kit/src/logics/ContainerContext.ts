@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { createReducer } from 'react-logic-utils'
 
 const APP_TOGGLE_TOAST = 'APP_TOGGLE_TOAST'
 const APP_CHNAGE_THEME = 'APP_CHNAGE_THEME'
@@ -11,28 +12,24 @@ const initialState = {
   theme: '',
 }
 
-const appReducer = (state: any, action: any) => {
-  switch (action.type) {
-    case APP_TOGGLE_TOAST:
-      return {
-        ...state,
-        toasts: [...state.toasts, action.toast],
-      }
-    case APP_CHNAGE_THEME:
-      return {
-        ...state,
-        theme: action.theme,
-      }
-  }
-  return state
-}
+const appReducer = createReducer(state => ({
+  [APP_TOGGLE_TOAST]: ({ toast }) => {
+    state.toasts.push(toast)
+  },
+  [APP_CHNAGE_THEME]: ({ theme }) => {
+    state.theme = theme
+  },
+}))
 
 export function useInitAppContext() {
   const [state, dispatch] = React.useReducer(appReducer, initialState)
-  return {
+  const data = {
     toasts: state.toasts,
     theme: state.theme,
+  }
+  const actions = {
     toggleToast: (text: any) => dispatch(toggleToast(text)),
     setTheme: (theme: string) => dispatch(updateTheme(theme)),
   }
+  return { ...data, ...actions}
 }

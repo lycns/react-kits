@@ -57,32 +57,23 @@ export const enhancePopupComponent = (
   WrappedComponent: any,
   layerClassName?: string,
 ) => (props: any): any => {
-  const { isOpen } = props
-  const [removed, setRemoved] = React.useState(false)
-  const shown = usePopupShown(isOpen)
-  const onRemove = React.useCallback(() => {
-    if (!shown) {
-      setRemoved(true)
-      props.onRemove()
-    }
-  }, [shown])
 
   return (
-    !removed && (
       <PopupComponent className={layerClassName}>
-        <WrappedComponent {...props} onRemove={onRemove} />
+        <WrappedComponent {...props} />
       </PopupComponent>
     )
-  )
 }
 
-export function usePopupShown(isOpen: boolean = true) {
+export function usePopupShown(hidden: boolean) {
   const [shown, setShown] = React.useState(false)
   React.useEffect(() => {
-    if (!isOpen) {
+    if (hidden) {
       setShown(false)
     }
-  }, [isOpen])
+  }, [hidden])
+
+  // 兼容处理，延时 10 毫秒
   React.useEffect(() => {
     setTimeout(() => {
       setShown(true)
@@ -94,10 +85,10 @@ export function usePopupShown(isOpen: boolean = true) {
   return shown
 }
 
-export function usePopupLayerOverlay(shown: boolean, onRemove?: any) {
+export function usePopupLayerOverlay(shown: boolean, onClose?: any) {
   const [overlay, setOverlay] = React.useState(true)
   React.useEffect(() => {
-    if (!onRemove) {
+    if (!onClose) {
       setOverlay(shown)
     }
   }, [shown])
@@ -113,8 +104,8 @@ export function usePopupLayerOverlay(shown: boolean, onRemove?: any) {
     }
   }, [overlay])
   return React.useCallback(() => {
-    if (!shown && onRemove) {
-      onRemove()
+    if (!shown && onClose) {
+      onClose()
       setOverlay(false)
     }
   }, [shown])

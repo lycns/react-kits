@@ -43,7 +43,7 @@ const ToastComponent = (props: any) => {
 export const Toast: React.FC<any> = (props) => {
   const { children, className, duration = 1500, animDuration = 3000 } = props
   const [visible, setVisible] = React.useState(true)
-  const shown = usePopupShown()
+  const shown = usePopupShown(false)
   const [hidden, setHidden] = React.useState(false)
   React.useEffect(() => {
     const toastTimer = setTimeout(() => {

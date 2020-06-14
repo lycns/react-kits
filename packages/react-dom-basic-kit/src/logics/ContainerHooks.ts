@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { AppContext } from '../containers/Container'
+import { AppContext } from '../containers/AppContainer'
 import { transformStyles } from '../utils/style'
 import { IS_WINDOWS, IS_WECHAT_WEBVIEW } from 'basic-kit-browser'
 import { useLocation } from 'react-router-dom'

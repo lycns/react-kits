@@ -2,14 +2,31 @@
   "name": "basic-kits",
   "private": true,
   "workspaces": [ "packages/*" ],
+  "engines": {
+    "node": ">=10.15.0",
+    "yarn": ">=1.5.1"
+  },
   "scripts": {
-    "init": "yarn install && lerna bootstrap && npm run build",
-    "build": "lerna run --stream --sort build:force",
-    "build:prod": "npm run build && lerna publish",
-    "clean": "lerna clean -y && rm -rf node_modules",
-    "clean:init": "npm run clean && npm run init"
+    "init": "yarn install && lerna bootstrap --use-workspaces && npm run build",
+    "build": "lerna run --stream --sort build",
+    "build:prod": "npm run clean:cache && npm run build",
+    "build:pub": "npm run build:prod && lerna publish",
+    "clean": "lerna clean -y && npm run clean:cache",
+    "clean:cache": "lerna exec --parallel -- rimraf .tsbuildcache lib",
+    "clean:init": "npm run clean && npm run init",
+    "format": "npm run format:tslint",
+    "format:tslint": "tslint --fix --config ./tslint.json 'src/**/*.{ts,tsx}'",
+    "test": "jest --coverage"
   },
   "devDependencies": {
-    "lerna": "^3.20.2"
+    "cross-env": "^7.0.2",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "lerna": "^3.20.2",
+    "lint-staged": "^10.2.10",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.1.0",
+    "tslint": "^6.1.2"
   }
 }

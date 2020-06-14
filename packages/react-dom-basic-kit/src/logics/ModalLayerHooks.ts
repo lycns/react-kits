@@ -1,52 +1,61 @@
 import * as React from 'react'
-import { ModalContext } from '../containers/ModalLayer'
+import uuidv4 from 'uuid/v4'
+import { useModalContext } from '../containers/ModalLayer'
+import { usePopupShown, usePopupLayerOverlay } from '../components/Popup'
 
-export const TOGGLED_MODALES: any = {}
+export function useModal(modal: any, deps = [] as any) {
+    const { open, hide, update, modals } = useModalContext()
+    const [uuid, setUuid] = React.useState('')
+    const memoModal = React.useMemo(() => modal, deps)
+    const opened = !!modals[uuid]
 
-function useUpdateModal(modalId: any, modal: any, deps: any[]) {
-  const { updateModal } = React.useContext(ModalContext)
-  React.useEffect(() => {
-    if (modalId) {
-      updateModal(modalId, modal)
+    const onShowModal = () => {
+        const uuid = uuidv4()
+        open(modal, uuid)
+        setUuid(uuid)
     }
-  }, [modalId, modal, ...deps])
-}
+    const onHideModal = React.useCallback(() => {
+        hide(uuid)
+        setUuid('')
+    }, [uuid])
 
-export function useToggleModal(modal: any, deps: any = []) {
-  const { showModal, closeModal } = React.useContext(ModalContext)
-  const [activeModal, setActiveModal] = React.useState<any>(null)
-  const memoModal = React.useMemo(() => modal, deps)
-  const toggleModal = React.useCallback(
-    (props) => {
-      if (activeModal && !TOGGLED_MODALES[activeModal]) {
-        setActiveModal(null)
-        closeModal(activeModal)
-      } else {
-        if (TOGGLED_MODALES[activeModal]) {
-          delete TOGGLED_MODALES[activeModal]
+    const onToggleModal = React.useCallback(() => {
+        if (opened) {
+            onHideModal()
+        } else {
+            onShowModal()
         }
-        const modalId = showModal(memoModal, undefined, props)
-        setActiveModal(modalId)
-      }
-    },
-    [activeModal, ...deps],
-  )
-  useUpdateModal(activeModal, memoModal, deps)
-  return toggleModal
+    }, [opened, onShowModal, onHideModal])
+
+    React.useEffect(() => {
+        if (!uuid) {
+            return
+        }
+        update(memoModal, uuid)
+    }, [uuid, memoModal, ...deps])
+
+    return {
+        show: onShowModal,
+        hide: onHideModal,
+        toggle: onToggleModal,
+    }
 }
 
-export function useModal(modal: any, deps: any = []) {
-  const { showModal, closeModal } = React.useContext(ModalContext)
-  const [activeModal, setActiveModal] = React.useState<any>()
-  const memoModal = React.useMemo(() => modal, deps)
-  const onShowModal = React.useCallback((props?: any) => {
-    const modalId = showModal(memoModal, undefined, props)
-    setActiveModal(modalId)
-  }, deps)
-  const onCloseModal = React.useCallback(() => {
-    setActiveModal(null)
-    closeModal(activeModal)
-  }, [activeModal])
-  useUpdateModal(activeModal, memoModal, deps)
-  return [onShowModal, onCloseModal]
+
+export function useModalClose(uuid: string) {
+  const { hide, close } = useModalContext()
+  const { shown } = useModalStatus(uuid)
+  const onHide = () => hide(uuid)
+  const onClose = () => close(uuid)
+  const onAnimtedClose = usePopupLayerOverlay(shown, onClose)
+  return [onHide, onAnimtedClose]
+}
+
+// opened -> shown -> hidden/shown false -> closed/opened falase
+export function useModalStatus(uuid: string) {
+  const { modals, opts } = useModalContext()
+  const opened = !!modals[uuid]
+  const hidden = opts[uuid]?.hidden
+  const shown = usePopupShown(hidden)
+  return { opened, shown }
 }

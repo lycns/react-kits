@@ -1,29 +1,27 @@
 import * as React from 'react'
-import { BrowserRouter, useLocation } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { ModalLayer } from './ModalLayer'
 import { Toast } from '../components/Toast'
 import { useInitAppContext } from '../logics/ContainerContext'
-import { transformStyles } from '../utils/style'
-import { useUrlQuery } from '../hooks/router'
 
 type IAppContainerProps = {
   basename?: string
   loading?: any
 }
 
-export const AppContext = React.createContext<any>(null)
+export const AppContext = React.createContext<any>({})
 
-export const Container: React.FC<IAppContainerProps> = (props) => {
+export const AppContainer: React.FC<IAppContainerProps> = (props) => {
   const { children, basename } = props
-  const appContext = useInitAppContext()
+  const context = useInitAppContext()
 
   return (
-    <AppContext.Provider value={appContext}>
+    <AppContext.Provider value={context}>
       <BrowserRouter basename={basename}>
-        {appContext.toasts.map((toast: any, i: number) => (
+        {context.toasts.map((toast: any, i: number) => (
           <Toast {...toast.props} key={i}>
             {toast.text}
-            {!!appContext.theme}
+            {!!context.theme}
           </Toast>
         ))}
         <ModalLayer>{children}</ModalLayer>
