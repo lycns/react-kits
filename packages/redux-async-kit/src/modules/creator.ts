@@ -27,7 +27,7 @@ export function createSlice(name: string, reducers: any) {
     useSelector: (selector: any) => {
       const data = useScopedSelector(name, selector)
       const cache = usePreviousWithNull(data)
-      return [data, data || cache]
+      return [cache, data]
     },
   }
 }
