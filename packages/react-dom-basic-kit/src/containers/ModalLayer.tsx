@@ -6,19 +6,21 @@ export const ModalContext = React.createContext<any>({})
 export const ModalLayer: React.FC<any> = (props) => {
   const { children } = props
   const context = useInitModalContext()
-  const { modals, opts } = context
+  const { modals } = context
 
   return (
     <ModalContext.Provider value={context}>
       {children}
       {Object.keys(modals).map((key) => {
-        return React.cloneElement(modals[key](key), { key })
+        const modal = modals[key]
+        return React.cloneElement(modal(key), { key }) 
       })}
     </ModalContext.Provider>
   )
 }
 
 export function useModalContext() {
+  console.log(React.useContext<any>(ModalContext))
   return React.useContext<any>(ModalContext)
 }
 

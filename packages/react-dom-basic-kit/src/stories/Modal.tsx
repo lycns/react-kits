@@ -22,8 +22,9 @@ const ThemeingText = () => {
 
 const TestModal = (props: any) => {
   const cx = useStyles()
+  const { uuid } = props
   return (
-    <Modal {...props} opts={{ blankClose: true }}>
+    <Modal uuid={uuid}>
       <div className={cx('test')}>Toggle Modal Test2</div>
     </Modal>
   )
@@ -38,6 +39,8 @@ export const ToggleModalComponent = () => {
         <div>jjjljkl {count}</div>
     </Modal>
   ), [count])
+
+  const modal2 = useModal(uuid => <TestModal uuid={uuid} />, [count])
   const toDark = () => {
     setTheme('dark')
   }
@@ -57,6 +60,9 @@ export const ToggleModalComponent = () => {
     <div>
       <div className={cx('test')} onClick={onOpen}>
         Toggle Dialog Modal
+      </div>
+      <div className={cx('test')} onClick={modal2.show}>
+        Toggle Dialog Modal2
       </div>
       <div className={cx('test')} onClick={onClose}>
         Close

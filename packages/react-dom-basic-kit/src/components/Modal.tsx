@@ -6,7 +6,7 @@ import {
 } from './Popup'
 
 import { transformStyles } from '../utils/style'
-import { cloneModalContent, useModalContext } from '../containers/ModalLayer'
+import { cloneModalContent } from '../containers/ModalLayer'
 import { useModalStatus, useModalClose } from '../logics/ModalLayerHooks'
 
 const cx = transformStyles(styles)

@@ -3,7 +3,9 @@ import uuidv4 from 'uuid/v4'
 import { useModalContext } from '../containers/ModalLayer'
 import { usePopupShown, usePopupLayerOverlay } from '../components/Popup'
 
-export function useModal(modal: any, deps = [] as any) {
+type IModalType = (uuid: string) => React.ReactElement
+
+export function useModal(modal: IModalType, deps = [] as any[]) {
     const { open, hide, update, modals } = useModalContext()
     const [uuid, setUuid] = React.useState('')
     const memoModal = React.useMemo(() => modal, deps)
