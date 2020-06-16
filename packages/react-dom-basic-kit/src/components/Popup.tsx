@@ -85,7 +85,7 @@ export function usePopupShown(hidden: boolean) {
   return shown
 }
 
-export function usePopupLayerOverlay(shown: boolean, onClose?: any) {
+export function usePopupOverlayClose(shown: boolean, onClose?: any) {
   const [overlay, setOverlay] = React.useState(true)
   React.useEffect(() => {
     if (!onClose) {

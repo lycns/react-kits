@@ -1,7 +1,7 @@
 import * as React from 'react'
 import uuidv4 from 'uuid/v4'
 import { useModalContext } from '../containers/ModalLayer'
-import { usePopupShown, usePopupLayerOverlay } from '../components/Popup'
+import { usePopupShown } from '../components/Popup'
 
 type IModalType = (uuid: string) => React.ReactElement
 
@@ -49,8 +49,7 @@ export function useModalClose(uuid: string) {
   const { shown } = useModalStatus(uuid)
   const onHide = () => hide(uuid)
   const onClose = () => close(uuid)
-  const onAnimtedClose = usePopupLayerOverlay(shown, onClose)
-  return [onHide, onAnimtedClose]
+  return [onHide, onClose]
 }
 
 // opened -> shown -> hidden/shown false -> closed/opened falase
