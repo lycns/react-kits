@@ -27,10 +27,7 @@ export function cloneModalContent(children: any) {
   return React.cloneElement(children, {
     onClick: (e: React.MouseEvent) => {
       e.stopPropagation()
-      const onChildClick = children.props.onClick
-      if (onChildClick) {
-        onChildClick()
-      }
+      children.props?.onClick?.()
     },
   })
 }
