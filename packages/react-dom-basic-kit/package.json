@@ -2,7 +2,7 @@
   "name": "react-dom-basic-kit",
   "version": "0.1.2",
   "description": "react dom basic kit",
-  "main": "src/index.ts",
+  "main": "lib/index.js",
   "scripts": {
     "start": "start-storybook -p 6006",
     "build": "webpack"
