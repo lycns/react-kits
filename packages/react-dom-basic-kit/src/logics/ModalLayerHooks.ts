@@ -48,7 +48,8 @@ export function useModalClose(uuid: string) {
   const { hide, close } = useModalContext()
   const { shown } = useModalStatus(uuid)
   const onHide = () => hide(uuid)
-  const onClose = () => close(uuid)
+  // !shown 表示处于 hidden 状态
+  const onClose = () => !shown ? close(uuid) : undefined
   return [onHide, onClose]
 }
 

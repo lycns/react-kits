@@ -20,7 +20,6 @@ export const ModalLayer: React.FC<any> = (props) => {
 }
 
 export function useModalContext() {
-  console.log(React.useContext<any>(ModalContext))
   return React.useContext<any>(ModalContext)
 }
 

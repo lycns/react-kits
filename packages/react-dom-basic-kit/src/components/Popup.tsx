@@ -85,14 +85,8 @@ export function usePopupShown(hidden: boolean) {
   return shown
 }
 
-export function usePopupOverlayClose(shown: boolean, onClose?: any) {
+export function usePopupOverlayClose(shown: boolean, onClose: () => void) {
   const [overlay, setOverlay] = React.useState(true)
-  React.useEffect(() => {
-    if (!onClose) {
-      setOverlay(shown)
-    }
-  }, [shown])
-
   React.useEffect(() => {
     const popupLayerNode = document.getElementById('PopupLayer')
     if (popupLayerNode) {
@@ -105,8 +99,8 @@ export function usePopupOverlayClose(shown: boolean, onClose?: any) {
   }, [overlay])
   return React.useCallback(() => {
     if (!shown && onClose) {
-      onClose()
       setOverlay(false)
+      setTimeout(onClose)
     }
   }, [shown])
 }
