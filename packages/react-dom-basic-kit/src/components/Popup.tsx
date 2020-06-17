@@ -85,16 +85,24 @@ export function usePopupShown(hidden: boolean) {
   return shown
 }
 
+let popupDeep = 0
+
 export function usePopupOverlayClose(shown: boolean, onClose: () => void) {
   const [overlay, setOverlay] = React.useState(true)
   React.useEffect(() => {
+    if (overlay) {
+      popupDeep++
+    } else {
+      popupDeep--
+    }
     const popupLayerNode = document.getElementById('PopupLayer')
-    if (popupLayerNode) {
-      if (overlay) {
-        popupLayerNode.style.zIndex = '2'
-      } else {
-        popupLayerNode.style.zIndex = ''
-      }
+    if (!popupLayerNode) {
+      return
+    }
+    if (overlay) {
+      popupLayerNode.style.zIndex = '2'
+    } else if (popupDeep === 0) {
+      popupLayerNode.style.zIndex = ''
     }
   }, [overlay])
   return React.useCallback(() => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal } from '../components/Modal'
+import { Modal, ModalOverlay } from '../components/Modal'
 import {
   useAppContext,
   useThemeStyles,
@@ -8,19 +8,16 @@ import {
 
 import styles from './styles/Container.module.scss'
 import styles_dark from './styles/Container-dark.module.scss'
-import { useModalContext } from '../containers/ModalLayer'
 import { useModal } from '../logics/ModalLayerHooks'
 
-function useStyles() {
-  return useThemeStyles(styles, { dark: styles_dark })
-}
+const useStyles = () => useThemeStyles(styles, { dark: styles_dark })
 
 const ThemeingText = () => {
   const cx = useStyles()
   return <div className={cx('test')}>Theme test Text</div>
 }
 
-const TestModal = (props: any) => {
+const TestModal3 = (props: any) => {
   const cx = useStyles()
   const { uuid } = props
   return (
@@ -30,13 +27,24 @@ const TestModal = (props: any) => {
   )
 }
 
+const TestModal = (props: any) => {
+  const cx = useStyles()
+  const { uuid } = props
+  const modal = useModal(uuid => <TestModal uuid={uuid} />)
+  return (
+    <ModalOverlay uuid={uuid}>
+      <div className={cx('test')} onClick={modal.show}>Toggle Modal Test2</div>
+    </ModalOverlay>
+  )
+}
+
 export const ToggleModalComponent = () => {
   const cx = useStyles()
   const { theme, setTheme } = useAppContext()
   const [count, setCount] = React.useState(0)
   const modal = useModal((uuid: string) => (
     <Modal uuid={uuid}>
-        <div>jjjljkl {count}</div>
+        <div onClick={modal2.show}>jjjljkl {count}</div>
     </Modal>
   ), [count])
 

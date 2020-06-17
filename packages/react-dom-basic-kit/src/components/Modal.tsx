@@ -3,6 +3,7 @@ import styles from './styles/Modal.module.scss'
 import {
   enhancePopupComponent,
   IPopupProps,
+  usePopupOverlayClose,
 } from './Popup'
 
 import { transformStyles } from '../utils/style'
@@ -35,3 +36,22 @@ const TModal: React.FC<IDrawerModalProps> = (props) => {
 }
 
 export const Modal = enhancePopupComponent(TModal)
+
+const TModalOverlay: React.FC<IDrawerModalProps> = (props) => {
+  const { uuid, children, className, layerClose = true, } = props
+  const [ onHide, onClose ] = useModalClose(uuid)
+  const { shown } = useModalStatus(uuid)
+  const onOverlayClose = usePopupOverlayClose(shown, onClose)
+
+  return (
+    <div
+      className={cx('modal', className, { shown })}
+      onClick={layerClose ? onHide : undefined}
+      onTransitionEnd={onOverlayClose}
+    >
+      {cloneModalContent(children)}
+    </div>
+  )
+}
+
+export const ModalOverlay = enhancePopupComponent(TModalOverlay)
