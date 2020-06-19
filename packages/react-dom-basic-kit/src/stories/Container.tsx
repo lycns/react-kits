@@ -16,9 +16,11 @@ function useStyles() {
 
 export const ToggleToastComponent = () => {
   const toggleToast = useToggleToast()
-  const toggleMessage = () => {
-    toggleToast('text')
-  }
+  const [count, setCount] = React.useState(0)
+  const toggleMessage = React.useCallback(() => {
+    toggleToast('text' + count)
+    setCount(x => x + 1)
+  }, [count])
   return <div onClick={toggleMessage}>Toggle Toast Test</div>
 }
 

@@ -9,6 +9,10 @@
   touch-action: none;
   user-select: none;
   z-index: 7000;
+
+  > *:nth-last-child(n + 2) {
+    display: none;
+  }
 }
 
 .toast {
@@ -20,16 +24,9 @@
   text-align: center;
   transition: all 0.3s;
 
-  opacity: 0;
-  transform: translateY(60px);
-  position: absolute;
+  opacity: 1;
 
-  &.shown {
-    opacity: 1;
-    transform: translateY(0);
-    position: static;
-  }
   &.hidden {
-    transform: translateY(-60px);
+    opacity: 0;
   }
 }

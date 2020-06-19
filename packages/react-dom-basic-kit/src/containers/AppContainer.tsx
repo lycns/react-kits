@@ -21,7 +21,6 @@ export const AppContainer: React.FC<IAppContainerProps> = (props) => {
         {context.toasts.map((toast: any, i: number) => (
           <Toast {...toast.props} key={i}>
             {toast.text}
-            {!!context.theme}
           </Toast>
         ))}
         <ModalLayer>{children}</ModalLayer>
