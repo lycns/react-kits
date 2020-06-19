@@ -21,8 +21,8 @@ type IDrawerModalProps = IPopupProps & {
 
 const TModal: React.FC<IDrawerModalProps> = (props) => {
   const { uuid, children, className, layerClose = true, } = props
-  const [ onHide, onClose ] = useModalClose(uuid)
   const { shown } = useModalStatus(uuid)
+  const [ onHide, onClose ] = useModalClose(uuid, 500)
 
   return (
     <div
@@ -39,8 +39,8 @@ export const Modal = enhancePopupComponent(TModal)
 
 const TModalOverlay: React.FC<IDrawerModalProps> = (props) => {
   const { uuid, children, className, layerClose = true, } = props
-  const [ onHide, onClose ] = useModalClose(uuid)
   const { shown } = useModalStatus(uuid)
+  const [ onHide, onClose ] = useModalClose(uuid, 500)
   const onOverlayClose = usePopupOverlayClose(shown, onClose)
 
   return (

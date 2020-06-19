@@ -11,9 +11,13 @@ export function useModal(modal: IModalType, deps = [] as any[]) {
     const memoModal = React.useMemo(() => modal, deps)
     const opened = !!modals[uuid]
 
-    const onShowModal = () => {
+    const onShowModal = (name?: string | React.UIEvent) => {
         const uuid = uuidv4()
-        open(modal, uuid)
+        if (typeof name === 'string') {
+            open(modal, uuid, name)
+        } else {
+            open(modal, uuid)
+        }
         setUuid(uuid)
     }
     const onHideModal = React.useCallback(() => {
@@ -21,11 +25,11 @@ export function useModal(modal: IModalType, deps = [] as any[]) {
         setUuid('')
     }, [uuid])
 
-    const onToggleModal = React.useCallback(() => {
+    const onToggleModal = React.useCallback((name?: string) => {
         if (opened) {
             onHideModal()
         } else {
-            onShowModal()
+            onShowModal(name)
         }
     }, [opened, onShowModal, onHideModal])
 
@@ -44,12 +48,24 @@ export function useModal(modal: IModalType, deps = [] as any[]) {
 }
 
 
-export function useModalClose(uuid: string) {
-  const { hide, close } = useModalContext()
-  const { shown } = useModalStatus(uuid)
-  const onHide = () => hide(uuid)
+export function useModalClose(uuid: string, timeout: number = 0) {
+  const { hide, close, opts } = useModalContext()
+  const hidden = opts[uuid]?.hidden
+  const onHide = () => {
+      hide(uuid)
+      if (timeout === 0) {
+          return
+      }
+      setTimeout(() => {
+        close(uuid)   
+      }, timeout)
+  }
   // !shown 表示处于 hidden 状态
-  const onClose = () => !shown ? close(uuid) : undefined
+  const onClose = React.useCallback(() => {
+      if (hidden) {
+        close(uuid)
+      }
+  }, [hidden])
   return [onHide, onClose]
 }
 

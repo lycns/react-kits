@@ -9,6 +9,7 @@ import {
 import styles from './styles/Container.module.scss'
 import styles_dark from './styles/Container-dark.module.scss'
 import { useModal } from '../logics/ModalLayerHooks'
+import { useModalContext } from '../containers/ModalLayer'
 
 const useStyles = () => useThemeStyles(styles, { dark: styles_dark })
 
@@ -42,6 +43,7 @@ export const ToggleModalComponent = () => {
   const cx = useStyles()
   const { theme, setTheme } = useAppContext()
   const [count, setCount] = React.useState(0)
+  const { hideByName } = useModalContext()
   const modal = useModal((uuid: string) => (
     <Modal uuid={uuid}>
         <div onClick={modal2.show}>jjjljkl {count}</div>
@@ -59,7 +61,7 @@ export const ToggleModalComponent = () => {
     modal.hide()
   }
   const onOpen = () => {
-    modal.toggle()
+    modal.toggle('test1')
     setTimeout(() => {
         setCount(x => x + 1)
     }, 1000);

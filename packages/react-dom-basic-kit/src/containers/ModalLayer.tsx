@@ -3,7 +3,11 @@ import { useInitModalContext } from '../logics/ModalLayerContext'
 
 export const ModalContext = React.createContext<any>({})
 
-export const ModalLayer: React.FC<any> = (props) => {
+type IModalLayerProps = {
+  
+} 
+
+export const ModalLayer: React.FC<IModalLayerProps> = props => {
   const { children } = props
   const context = useInitModalContext()
   const { modals } = context
