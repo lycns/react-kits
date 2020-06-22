@@ -3,33 +3,45 @@ import uuidv4 from 'uuid/v4'
 import { useModalContext } from '../containers/ModalLayer'
 import { usePopupShown } from '../components/Popup'
 
-type IModalType = (uuid: string) => React.ReactElement
+export type IModalProps = {
+    uuid: string
+}
 
-export function useModal(modal: IModalType, deps = [] as any[]) {
+type IModalType<T> = (props: IModalProps & T) => React.ReactElement
+
+function isUIEvent(test: any): test is React.UIEvent {
+    return test && !!test.nativeEvent
+}
+
+export function useModal<T>(modal: IModalType<T>, deps = [] as any[]) {
     const { open, hide, update, modals } = useModalContext()
     const [uuid, setUuid] = React.useState('')
+    const uuidRef = React.useRef('')
     const memoModal = React.useMemo(() => modal, deps)
     const opened = !!modals[uuid]
 
-    const onShowModal = (name?: string | React.UIEvent) => {
+    const onShowModal = (props?: T | React.UIEvent) => {
         const uuid = uuidv4()
-        if (typeof name === 'string') {
-            open(modal, uuid, name)
-        } else {
+        if (isUIEvent(props)) {
             open(modal, uuid)
+        } else {
+            open(modal, uuid, props)
         }
         setUuid(uuid)
+        uuidRef.current = uuid
     }
+
     const onHideModal = React.useCallback(() => {
-        hide(uuid)
+        hide(uuid || uuidRef.current)
         setUuid('')
+        uuidRef.current = ''
     }, [uuid])
 
-    const onToggleModal = React.useCallback((name?: string) => {
-        if (opened) {
+    const onToggleModal = React.useCallback((props?: T) => {
+        if (opened || (!uuid && uuidRef.current)) {
             onHideModal()
         } else {
-            onShowModal(name)
+            onShowModal(props)
         }
     }, [opened, onShowModal, onHideModal])
 
@@ -38,7 +50,7 @@ export function useModal(modal: IModalType, deps = [] as any[]) {
             return
         }
         update(memoModal, uuid)
-    }, [uuid, memoModal, ...deps])
+    }, [uuid, memoModal])
 
     return {
         show: onShowModal,

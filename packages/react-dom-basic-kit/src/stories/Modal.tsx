@@ -31,7 +31,7 @@ const TestModal3 = (props: any) => {
 const TestModal = (props: any) => {
   const cx = useStyles()
   const { uuid } = props
-  const modal = useModal(uuid => <TestModal uuid={uuid} />)
+  const modal = useModal(({ uuid }) => <TestModal uuid={uuid} />)
   return (
     <ModalOverlay uuid={uuid}>
       <div className={cx('test')} onClick={modal.show}>Toggle Modal Test2</div>
@@ -44,13 +44,13 @@ export const ToggleModalComponent = () => {
   const { theme, setTheme } = useAppContext()
   const [count, setCount] = React.useState(0)
   const { hideByName } = useModalContext()
-  const modal = useModal((uuid: string) => (
-    <Modal uuid={uuid}>
+  const modal = useModal<any>(mProps => (
+    <Modal {...mProps}>
         <div onClick={modal2.show}>jjjljkl {count}</div>
     </Modal>
   ), [count])
 
-  const modal2 = useModal(uuid => <TestModal uuid={uuid} />, [count])
+  const modal2 = useModal(({ uuid }) => <TestModal uuid={uuid} />, [count])
   const toDark = () => {
     setTheme('dark')
   }
@@ -58,10 +58,10 @@ export const ToggleModalComponent = () => {
     setTheme('')
   }
   const onClose = () => {
-    modal.hide()
+    modal.toggle()
   }
   const onOpen = () => {
-    modal.toggle('test1')
+    modal.show({ name: 'xxx' })
     setTimeout(() => {
         setCount(x => x + 1)
     }, 1000);

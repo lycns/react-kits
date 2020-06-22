@@ -8,12 +8,12 @@ const MODAL_ACTION_CLOSE_BYNAME = 'MODAL_ACTION_CLOSE_BYNAME'
 const MODAL_ACTION_HIDE = 'MODAL_ACTION_HIDE'
 const MODAL_ACTION_HIDE_BYNAME = 'MODAL_ACTION_HIDE_BYNAME'
 
-const open = (modal: any, uuid: string, name?: string) => ({ type: MODAL_ACTION_OPEN, modal, uuid, name })
+const open = (modal: any, uuid: string, props?: any) => ({ type: MODAL_ACTION_OPEN, modal, uuid, props })
 const update = (modal: any, uuid: string) => ({ type: MODAL_ACTION_UPDATE, modal, uuid })
 const close = (uuid: string) => ({ type: MODAL_ACTION_CLOSE, uuid })
-const closeByName = (name: string) => ({ type: MODAL_ACTION_CLOSE_BYNAME, name })
+// const closeByName = (name: string) => ({ type: MODAL_ACTION_CLOSE_BYNAME, name })
 const hide = (uuid: string) => ({ type: MODAL_ACTION_HIDE, uuid })
-const hideByName = (name: string) => ({ type: MODAL_ACTION_HIDE_BYNAME, name })
+// const hideByName = (name: string) => ({ type: MODAL_ACTION_HIDE_BYNAME, name })
 
 const initialState = {
   modals: {},
@@ -22,16 +22,19 @@ const initialState = {
 }
 
 const appReducer = createReducer(state => ({
-  [MODAL_ACTION_OPEN]: ({ modal, uuid, name }) => {
+  [MODAL_ACTION_OPEN]: ({ modal, uuid, props }) => {
     state.modals[uuid] = modal
     state.opts[uuid] = {}
-    if (!name) {
-      return
+    if (props) {
+      state.opts[uuid].props = props
     }
-    if (!state.names[name]) {
-      state.names[name] = []
-    }
-    state.names[name].push(uuid)
+    // if (!name) {
+    //   return
+    // }
+    // if (!state.names[name]) {
+    //   state.names[name] = []
+    // }
+    // state.names[name].push(uuid)
   },
   [MODAL_ACTION_UPDATE]: ({ modal, uuid }) => {
     if (!state.modals[uuid]) {
@@ -42,34 +45,34 @@ const appReducer = createReducer(state => ({
   [MODAL_ACTION_CLOSE]: ({ uuid }) => {
     delete state.modals[uuid]
     delete state.opts[uuid]
-    for (const name of Object.keys(state.names)) {
-      const uuids = state.names[name].filter((id: string) => id !== uuid)
-      if (uuids.length === 0) {
-        delete state.names[name]
-      } else {
-        state.names[name] = uuids
-      }
-    }
+    // for (const name of Object.keys(state.names)) {
+    //   const uuids = state.names[name].filter((id: string) => id !== uuid)
+    //   if (uuids.length === 0) {
+    //     delete state.names[name]
+    //   } else {
+    //     state.names[name] = uuids
+    //   }
+    // }
   },
-  [MODAL_ACTION_CLOSE_BYNAME]: ({ name }) => {
-    const uuids = state.names[name] || []
-    for (const uuid of uuids) {
-      delete state.modals[uuid]
-      delete state.opts[uuid]
-    }
-    delete state.names[name]
-  },
+  // [MODAL_ACTION_CLOSE_BYNAME]: ({ name }) => {
+  //   const uuids = state.names[name] || []
+  //   for (const uuid of uuids) {
+  //     delete state.modals[uuid]
+  //     delete state.opts[uuid]
+  //   }
+  //   delete state.names[name]
+  // },
   [MODAL_ACTION_HIDE]: ({ uuid }) => {
     const opts = state.opts[uuid]
     state.opts[uuid] = { ...opts, hidden: true }
   },
-  [MODAL_ACTION_HIDE_BYNAME]: ({ name }) => {
-    const uuids = state.names[name] || []
-    for (const uuid of uuids) {
-      const opts = state.opts[uuid]
-      state.opts[uuid] = { ...opts, hidden: true }
-    }
-  },
+  // [MODAL_ACTION_HIDE_BYNAME]: ({ name }) => {
+  //   const uuids = state.names[name] || []
+  //   for (const uuid of uuids) {
+  //     const opts = state.opts[uuid]
+  //     state.opts[uuid] = { ...opts, hidden: true }
+  //   }
+  // },
 }))
 
 export function useInitModalContext() {
@@ -80,12 +83,12 @@ export function useInitModalContext() {
     names: state.names,
   }
   const actions = {
-    open: (modal: any, uuid: string, name?: string) => dispatch(open(modal, uuid, name)),
+    open: (modal: any, uuid: string, props?: any) => dispatch(open(modal, uuid, props)),
     update: (modal: any, uuid: string) => dispatch(update(modal, uuid)),
     close: (uuid: string) => dispatch(close(uuid)),
     // closeByName: (name: string) => dispatch(closeByName(name)), // 这个原则上应该不会用到
     hide: (uuid: string) => dispatch(hide(uuid)),
-    hideByName: (name: string) => dispatch(hideByName(name)),
+    // hideByName: (name: string) => dispatch(hideByName(name)), // 这个理论上应该也没什么用
   }
   return { ...data, ...actions }
 }

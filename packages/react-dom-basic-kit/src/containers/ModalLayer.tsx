@@ -10,14 +10,15 @@ type IModalLayerProps = {
 export const ModalLayer: React.FC<IModalLayerProps> = props => {
   const { children } = props
   const context = useInitModalContext()
-  const { modals } = context
+  const { modals, opts } = context
 
   return (
     <ModalContext.Provider value={context}>
       {children}
       {Object.keys(modals).map((key) => {
         const modal = modals[key]
-        return React.cloneElement(modal(key), { key }) 
+        const props = opts[key]?.props
+        return React.cloneElement(modal({ uuid: key, ...props }), { key }) 
       })}
     </ModalContext.Provider>
   )
