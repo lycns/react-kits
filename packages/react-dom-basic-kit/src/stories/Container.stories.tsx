@@ -10,11 +10,16 @@ import {
 import styles from './styles/Container.module.scss'
 import styles_dark from './styles/Container-dark.module.scss'
 
+export default {
+  title: 'container',
+}
+
+
 function useStyles() {
   return useThemeStyles(styles, { dark: styles_dark })
 }
 
-export const ToggleToastComponent = () => {
+const ToggleToastComponent = () => {
   const toggleToast = useToggleToast()
   const [count, setCount] = React.useState(0)
   const toggleMessage = React.useCallback(() => {

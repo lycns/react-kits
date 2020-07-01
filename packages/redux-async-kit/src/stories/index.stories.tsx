@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 
 import { configureStore } from '../modules/store'
 import { Provider } from 'react-redux'
@@ -9,6 +8,10 @@ import { testReducer } from './reducer'
 import { testAsyncAction, testAction } from './action'
 import { testSelector } from './selectors'
 import { testSlice } from './slice'
+
+export default {
+    title: 'async slice'
+}
 
 const testSlice2 = createSlice('test2', {
     testReducer,
@@ -90,8 +93,8 @@ const BasicTestContainer = () => {
     )
 }
 
-// ; (top as any)['store'] = store
-
-storiesOf('Container', module).add('basic', () =>  (
-<Provider store={store}><BasicTestContainer /> </Provider>
-))
+export const Container = () => {
+    return (
+        <Provider store={store}><BasicTestContainer /> </Provider>
+    )
+}

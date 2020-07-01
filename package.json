@@ -7,6 +7,7 @@
     "yarn": ">=1.5.1"
   },
   "scripts": {
+    "start": "start-storybook -p 6007",
     "init": "yarn install && lerna bootstrap --use-workspaces && npm run build",
     "build": "lerna run --stream --sort build",
     "build:prod": "npm run clean:cache && npm run build",
@@ -19,6 +20,8 @@
     "test": "jest --coverage"
   },
   "devDependencies": {
+    "@storybook/addon-info": "^5.2.8",
+    "@storybook/react": "^5.2.8",
     "cross-env": "^7.0.2",
     "husky": "^4.2.5",
     "jest": "^26.0.1",

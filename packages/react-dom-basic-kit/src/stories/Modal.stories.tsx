@@ -11,6 +11,11 @@ import styles_dark from './styles/Container-dark.module.scss'
 import { useModal } from '../logics/ModalLayerHooks'
 import { useModalContext } from '../containers/ModalLayer'
 
+export default {
+  title: 'modal',
+}
+
+
 const useStyles = () => useThemeStyles(styles, { dark: styles_dark })
 
 const ThemeingText = () => {
@@ -39,7 +44,7 @@ const TestModal = (props: any) => {
   )
 }
 
-export const ToggleModalComponent = () => {
+const ToggleModalComponent = () => {
   const cx = useStyles()
   const { theme, setTheme } = useAppContext()
   const [count, setCount] = React.useState(0)
