@@ -82,6 +82,10 @@ const ToggleModalComponent = () => {
       <div className={cx('test')} onClick={onClose}>
         Close
       </div>
+
+      <div className={cx('bottom')} onClick={onOpen}>
+        bottom ------------------------------------------------------------------------------
+      </div>
       {/* <div className={cx('test')} onClick={toggleModal}>
         Toggle Dialog Modal
       </div>

@@ -6,16 +6,36 @@ import { transformStyles } from '../utils/style'
 const cx = transformStyles(styles)
 
 const POPUP_LAYER_ID = 'PopupLayer'
-let scrolledTop = 0
+const scrolledPoint = { x: 0, y: 0 }
+
+function hasVerticalScrollbar() {
+  return document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight);
+}
+
+function hasHorizontalScrollbar() {
+  return document.body.scrollWidth > (window.innerWidth || document.documentElement.clientWidth);
+}
 
 const createPopupLayer = (): HTMLElement => {
   const node = document.createElement('div')
   node.id = POPUP_LAYER_ID
   node.className = cx('popup-layer')
   // node.onclick = e => e.preventDefault();
-  scrolledTop = window.scrollY
+  scrolledPoint.y = window.scrollY
+  scrolledPoint.x = window.scrollX
   document.body.className = cx('popup-locked-body')
-  document.body.style.top = `-${scrolledTop}px`
+  if (scrolledPoint.x > 0) {
+    document.body.style.left = `-${scrolledPoint.x}px`
+  }
+  if (scrolledPoint.y > 0) {
+    document.body.style.top = `-${scrolledPoint.y}px`
+  }
+  if (hasVerticalScrollbar()) {
+    document.body.style.overflowY = 'scroll'
+  }
+  if (hasHorizontalScrollbar()) {
+    document.body.style.overflowX = 'scroll'
+  }
   document.body.appendChild(node)
   return node
 }
@@ -26,9 +46,10 @@ const removePopupLayer = (rootNode: HTMLElement) => {
       return
     }
     document.body.className = ''
+    document.body.setAttribute('style', '')
     // document.body.style.overflow = 'auto'
     document.body.removeChild(rootNode)
-    window.scrollTo(0, scrolledTop)
+    window.scrollTo(scrolledPoint.x, scrolledPoint.y)
   }
 }
 
