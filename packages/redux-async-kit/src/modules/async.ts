@@ -5,9 +5,9 @@ export const asyncMiddleware = ({ dispatch, getState }: any) => {
   return (next: any) => (action: any) => {
     const { target, type, success, meta, payload, failure, cache, selector } = action
     const state = getState()
-    const { __values__ } = action
-    const preload = __values__?.preload
-    const scopes = xArray(__values__?.scope)
+    const { __values__ = {} } = action
+    const preload = __values__.preload
+    const scopes = xArray(__values__.scope)
 
     for (const scope of scopes) {
       const preloadeds = state[scope]?.__basic__?.__values__?.preload || []
