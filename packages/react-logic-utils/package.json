@@ -1,6 +1,6 @@
 {
   "name": "react-logic-utils",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simplify work flow for redux",
   "main": "lib/index.js",
   "sideEffects": false,
