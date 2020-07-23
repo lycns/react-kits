@@ -1,8 +1,6 @@
 import * as React from 'react'
 import { useInitModalContext } from '../logics/ModalLayerContext'
 
-export const ModalContext = React.createContext<any>({})
-
 type IModalLayerProps = {
   
 } 
@@ -23,6 +21,8 @@ export const ModalLayer: React.FC<IModalLayerProps> = props => {
     </ModalContext.Provider>
   )
 }
+
+export const ModalContext = React.createContext<any>({})
 
 export function useModalContext() {
   return React.useContext<any>(ModalContext)

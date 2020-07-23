@@ -23,9 +23,16 @@ const store = configureStore({
       testSlice2.injector,
   ]})
 
+
+testSlice.dispatch(testAsyncAction.getName(10, 1))
+// console.log(store.getState())
+// setTimeout(() => {
+//     console.log(store.getState())
+// }, 1200);
+
 const BasicTestContainer = () => {
     const [count, setCount] = React.useState(0)
-    const [name, cacheName] = testSlice.useSelector(testSelector.testName)
+    const [cacheName, name] = testSlice.useSelector(testSelector.testName)
     const [detail] = testSlice.useSelector(testSelector.testDetail)
     const [setName] = testSlice.useAction(testAction.setName)
     const [getName, nameState] = testSlice.useAction(testAsyncAction.getName)
@@ -65,10 +72,10 @@ const BasicTestContainer = () => {
         await getDetail()
     }, [count])
 
-    useAsyncEffect(async () => {
-        await getName(count)
-        await getDetailByCache()
-    })
+    // useAsyncEffect(async () => {
+    //     await getName(count)
+    //     await getDetailByCache()
+    // })
 
     return (
         <div>
