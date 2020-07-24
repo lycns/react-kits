@@ -1,5 +1,6 @@
 import mapValues from 'lodash/mapValues'
 import { xArray } from 'basic-kit-js'
+import { storeInstance } from './store'
 
 export const asyncMiddleware = ({ dispatch, getState }: any) => {
   return (next: any) => (action: any) => {
@@ -7,11 +8,19 @@ export const asyncMiddleware = ({ dispatch, getState }: any) => {
     const state = getState()
     const { __values__ = {} } = action
     const preload = __values__.preload
-    const scopes = xArray(__values__.scope)
 
-    for (const scope of scopes) {
-      const preloadeds = state[scope]?.__basic__?.__values__?.preload || []
-      if (!preload && preloadeds.includes(type)) {
+    if (storeInstance?.preloadState) {
+      const scopes = xArray(__values__.scope)
+      let preloaded = false
+      for (const scope of scopes) {
+        const preloadState = storeInstance?.preloadState[scope] || []
+        const idx = preloadState.indexOf(type)
+        if (idx > -1) {
+          preloaded = true
+          delete preloadState[idx]
+        }
+      }
+      if (preloaded) {
         __values__.preloaded = true
         return next({ ...action, __values__ })
       }

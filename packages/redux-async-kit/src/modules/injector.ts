@@ -14,9 +14,15 @@ export function formatReducers(reducers: any, values: any = {}) {
   })
 }
 
-export function injectReducers(name: string, reducers: any) {
+export type IInjectReducerInfo = {
+  name: string,
+  reducers: any,
+} | undefined
+
+export function injectReducers(name: string, reducers: any): IInjectReducerInfo  {
+  const reducerInfo = { name, reducers }
   if (!storeInstance) {
-    return
+    return reducerInfo
   }
   if (name) {
     const { asyncReducers } = storeInstance
@@ -29,4 +35,5 @@ export function injectReducers(name: string, reducers: any) {
     const combinedReducers = combineReducers({ ...asyncReducers }) as any
     storeInstance.replaceReducer(combinedReducers)
   }
+  return
 }
