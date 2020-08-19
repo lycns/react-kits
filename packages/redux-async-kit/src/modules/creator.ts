@@ -11,7 +11,9 @@ import { storeInstance } from './store'
 
 export function createSlice(name: string, reducers: any) {
   return {
-    selector: (select: any) => (state: any) => select(state[name]),
+    selector: (select: any = (x: any) => x) => {
+      (state: any) => select(state[name])
+    },
     injector: () => {
       return injectReducers(name, reducers)
     },

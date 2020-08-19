@@ -91,9 +91,6 @@ function formatPreloadState(state: any) {
   return formatedState
 }
 
-export async function getAsyncState(timeout: number, promise: any[]) {
-  return await Promise.race([
-    Promise.all(promise),
-    sleep(timeout)
-  ])
+export async function asyncDispatch(timeout: number, promise: any[]) {
+  return await Promise.race([Promise.all(promise), sleep(timeout)])
 }

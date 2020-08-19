@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, StaticRouter } from 'react-router-dom'
 import { ModalLayer } from './ModalLayer'
 import { Toast } from '../components/Toast'
 import { useInitAppContext } from '../logics/ContainerContext'
@@ -29,3 +29,20 @@ export const AppContainer: React.FC<IAppContainerProps> = (props) => {
     </AppContext.Provider>
   )
 }
+// export const AppSSRContainer: React.FC<IAppContainerProps> = props => {
+//   const { children, basename } = props
+//   const context = useInitAppContext()
+//   return (
+//     <AppContext.Provider value={context}>
+//       <StaticRouter basename={basename}>
+//         {context.toasts.map((toast: any, i: number) => (
+//           <Toast {...toast.props} key={i}>
+//             {toast.text}
+//           </Toast>
+//         ))}
+//         <ModalLayer>{children}</ModalLayer>
+//         {/* <DebugConsole /> */}
+//       </StaticRouter>
+//     </AppContext.Provider>
+//   )
+// }
