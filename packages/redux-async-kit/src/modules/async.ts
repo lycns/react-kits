@@ -2,10 +2,10 @@ import mapValues from 'lodash/mapValues'
 import { xArray } from 'basic-kit-js'
 import { storeInstance } from './store'
 
+
 export const asyncMiddleware = ({ dispatch, getState }: any) => {
   return (next: any) => (action: any) => {
     const { target, type, success, meta, payload, failure, cache, selector } = action
-    const state = getState()
     const { __values__ = {} } = action
     const preload = __values__.preload
 
@@ -30,6 +30,7 @@ export const asyncMiddleware = ({ dispatch, getState }: any) => {
       delete __values__.preload
       return async () => {
         let selected = {}
+        const state = getState()
         if (typeof selector === 'function') {
           selected = selector(state)
         } else if (typeof selector === 'object') {
