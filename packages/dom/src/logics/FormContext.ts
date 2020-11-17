@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createReducer, IReducerMap } from 'react-logic-utils'
+import { createReducer, IReducerMap } from '@react-kits/common'
 
 const FORM_INITIAL_STATE = 'FORM_INITIAL_STATE'
 const FORM_UPDATE_DATA = 'FORM_UPDATE_DATA'

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as Redux from 'react-redux'
 import { createSelector } from 'reselect'
-import { sleep } from 'basic-kit-js'
+import { xSleep } from '@basic-kits/js'
 import { createActionPromise } from './creator'
 
 export function useScopedAction(name: string | string[], action: any, deps: any[] = []) {
@@ -21,7 +21,7 @@ export function useScopedAction(name: string | string[], action: any, deps: any[
         await promise()
         // 正常浏览器下，reducer 中的后续操作会阻塞线程，useCurrentCallback 应该拿到的都是最新数据
         // 如果有浏览器不兼容，可以尝试休眠解决
-        await sleep(10)
+        await xSleep(10)
       } catch (e) {
         setError(e)
         throw(e)

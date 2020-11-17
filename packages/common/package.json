@@ -1,6 +1,6 @@
 {
-  "name": "react-logic-utils",
-  "version": "0.0.4",
+  "name": "@react-kits/common",
+  "version": "0.0.1",
   "description": "A simplify work flow for redux",
   "main": "lib/index.js",
   "sideEffects": false,
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/lynnkoo/browser-basic-kit#readme",
   "devDependencies": {
-    "@types/react": "^16.9.35",
+    "@types/react": "^16.9.56",
     "husky": "^3.0.7",
     "lint-staged": "^9.4.0",
     "prettier": "^1.18.2",
@@ -32,9 +32,13 @@
     "typescript": "^3.2.2"
   },
   "dependencies": {
-    "basic-kit-js": "^0.0.1",
+    "@basic-kits/js": "^0.0.4",
     "immer": "^7.0.1",
-    "react": "^16.13.1"
+    "react": "^17.0.1",
+    "react-router": "^5.1.2"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "gitHead": "20090c232fd0c9e032a185c14eaef7d224742bb2"
 }

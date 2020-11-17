@@ -1,5 +1,5 @@
 {
-  "name": "basic-kits",
+  "name": "react-kits",
   "private": true,
   "workspaces": [ "packages/*" ],
   "engines": {

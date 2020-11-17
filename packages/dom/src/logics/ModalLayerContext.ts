@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createReducer } from 'react-logic-utils'
+import { createReducer } from '@react-kits/common'
 
 const MODAL_ACTION_OPEN = 'MODAL_ACTION_OPEN'
 const MODAL_ACTION_UPDATE = 'MODAL_ACTION_UPDATE'

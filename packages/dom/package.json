@@ -1,6 +1,6 @@
 {
-  "name": "react-dom-basic-kit",
-  "version": "0.1.8",
+  "name": "@react-kits/dom",
+  "version": "0.0.1",
   "description": "react dom basic kit",
   "main": "lib/index.js",
   "scripts": {
@@ -23,13 +23,13 @@
   },
   "homepage": "https://github.com/lynnkoo/react-dom-basic-kit#readme",
   "dependencies": {
-    "basic-kit-browser": "^0.0.1",
+    "@basic-kits/dom": "^0.0.4",
+    "@react-kits/common": "^0.0.1",
     "classnames": "^2.2.6",
     "immer": "^5.3.6",
     "qs": "^6.9.4",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-logic-utils": "^0.0.4",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-router-dom": "^5.1.2",
     "uuid": "^3.3.3"
   },
@@ -38,7 +38,7 @@
     "@types/classnames": "^2.2.9",
     "@types/node": "^12.7.8",
     "@types/qs": "^6.9.3",
-    "@types/react": "^16.9.11",
+    "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.4",
     "@types/react-router-dom": "^5.1.0",
     "@types/uuid": "^3.4.5",
@@ -64,6 +64,9 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
     "webpack-node-externals": "^1.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "gitHead": "2fca1d45271fd4bcecd15614b494c0b6b665e6fd"
 }

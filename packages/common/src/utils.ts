@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { xArray } from 'basic-kit-js'
+import { xArray } from '@basic-kits/js'
 
 export function createLazyComponent(opts: any) {
     const { loader, injector } = opts

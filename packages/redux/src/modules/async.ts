@@ -1,5 +1,5 @@
 import mapValues from 'lodash/mapValues'
-import { xArray } from 'basic-kit-js'
+import { xArray } from '@basic-kits/js'
 import { storeInstance } from './store'
 
 

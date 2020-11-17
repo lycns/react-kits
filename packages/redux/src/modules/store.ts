@@ -10,7 +10,7 @@ import { asyncMiddleware } from './async'
 import { formatReducers, IInjectReducerInfo } from './injector'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import loggerMiddleware from 'redux-logger'
-import { xArray, sleep } from 'basic-kit-js'
+import { xArray, xSleep } from '@basic-kits/js'
 import _cloneDeep from 'lodash/cloneDeep'
 
 type StoreInstance = Store & {
@@ -92,5 +92,5 @@ function formatPreloadState(state: any) {
 }
 
 export async function asyncDispatch(timeout: number, promise: any[]) {
-  return await Promise.race([Promise.all(promise), sleep(timeout)])
+  return await Promise.race([Promise.all(promise), xSleep(timeout)])
 }

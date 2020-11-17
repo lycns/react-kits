@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { AppContext } from '../containers/AppContainer'
 import { transformStyles } from '../utils/style'
-import { IS_WINDOWS, IS_WECHAT_WEBVIEW } from 'basic-kit-browser'
+import { DeviceTypes, BroswerTypes } from '@basic-kits/dom'
 import { useLocation } from 'react-router-dom'
 
 export function useAppContext() {
@@ -36,7 +36,7 @@ export function useThemeStyles(styles: any, themes?: any) {
 
 function initInnerHeight(rootNode: any) {
   // windows 如果不减去两个像素就会出现滚动条
-  const heightOffset = IS_WINDOWS ? -2 : 0
+  const heightOffset = DeviceTypes.isWindows ? -2 : 0
   const innerHeight = window.innerHeight
   rootNode.style.minHeight = innerHeight
     ? innerHeight + heightOffset + 'px'
@@ -50,7 +50,7 @@ export function useInitRootHeight() {
     if (!rootNode.style.minHeight) {
       // 初始化 min height， 主要目的为兼容 safari 的 innerHeight
       initInnerHeight(rootNode)
-    } else if (IS_WECHAT_WEBVIEW) {
+    } else if (BroswerTypes.isWechatWebview) {
       // WORKAROUND 兼容 wechat 内置浏览器路由切换时 innerHeight 不一致的问题, 路由延迟大概 100 ms
       setTimeout(() => {
         initInnerHeight(rootNode)

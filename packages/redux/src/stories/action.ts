@@ -4,10 +4,10 @@ import { createPayloadAction } from '../modules/creator'
 import { testSlice } from './slice'
 import { testSelector } from './selectors'
 import { memoryCache } from '../modules/cache'
-import { sleep } from 'basic-kit-js'
+import { xSleep } from '@basic-kits/js'
 
 const getName = async ({ count, keyword }: any = {}) => {
-    await sleep(1000)
+    await xSleep(1000)
     if (keyword === '1') {
         throw new Error('keyword === 1')
     }
@@ -15,7 +15,7 @@ const getName = async ({ count, keyword }: any = {}) => {
 }
 
 const getDetail = async ({ name }: any = {}) => {
-    await sleep(500)
+    await xSleep(500)
     return 'GetDetailSuccess:' + name
 }
 
