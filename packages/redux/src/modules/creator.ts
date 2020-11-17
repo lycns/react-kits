@@ -12,7 +12,7 @@ import { storeInstance } from './store'
 export function createSlice(name: string, reducers: any) {
   return {
     selector: (select: any = (x: any) => x) => {
-      (state: any) => select(state[name])
+      return (state: any) => select(state[name])
     },
     injector: () => {
       return injectReducers(name, reducers)

@@ -40,7 +40,9 @@ export const testAsyncAction = {
         type: TEST_ASYNC_ACTION.GET_DETAIL,
         target: getDetail,
         selector: selectorTestName,
-        meta: ({ name }: any) => ({ name }),
+        meta: (selector: any) => {
+            return { name: selector.name }
+        },
         failure: TEST_ACTION.SET_ERROR,
         success: testAction.setDetail,
     }),
