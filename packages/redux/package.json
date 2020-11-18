@@ -1,6 +1,6 @@
 {
   "name": "@react-kits/redux",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simplify work flow for redux",
   "main": "lib/index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   "homepage": "https://github.com/lynnkoo/redux-async-kit#readme",
   "dependencies": {
     "@basic-kits/js": "^0.0.4",
-    "@react-kits/common": "^0.0.3",
+    "@react-kits/common": "^0.0.4",
     "immer": "^5.1.0",
     "lodash": "^4.17.15",
     "react": "^17.0.1",
