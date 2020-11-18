@@ -11,7 +11,7 @@ import { storeInstance } from './store'
 
 export function createSlice(name: string, reducers: any) {
   return {
-    selector: (select: any = (x: any) => x) => {
+    selector: (select: any) => {
       return (state: any) => select(state[name])
     },
     injector: () => {
@@ -26,10 +26,10 @@ export function createSlice(name: string, reducers: any) {
     useAction: (action: any, deps?: any) => {
       return useScopedAction(name, action, deps)
     },
-    useSelector: (selector: any) => {
+    useSelector: (selector: any, defalutValue?: any) => {
       const data = useScopedSelector(name, selector)
       const cache = usePreviousWithNull(data)
-      return [cache, data]
+      return (cache || data) ? [cache, data] : [defalutValue]
     },
   }
 }

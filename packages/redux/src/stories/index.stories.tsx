@@ -1,9 +1,11 @@
 import React from 'react'
-
-import { configureStore } from '../modules/store'
+import {
+    configureStore,
+    createSlice,
+    useAsyncCallback,
+    useScopedAction,
+} from '../index'
 import { Provider } from 'react-redux'
-import { createSlice } from '../modules/creator'
-import { useAsyncCallback, useAsyncEffect, useScopedAction } from '../modules/hooks'
 import { testReducer } from './reducer'
 import { testAsyncAction, testAction } from './action'
 import { testSelector } from './selectors'
@@ -33,7 +35,7 @@ testSlice.dispatch(testAsyncAction.getName(10, 1))
 const BasicTestContainer = () => {
     const [count, setCount] = React.useState(0)
     const [cacheName, name] = testSlice.useSelector(testSelector.testName)
-    const [detail] = testSlice.useSelector(testSelector.testDetail)
+    const [detail] = testSlice.useSelector(testSelector.testDetail, 'defalut detail')
     const [setName] = testSlice.useAction(testAction.setName)
     const [getName, nameState] = testSlice.useAction(testAsyncAction.getName)
     const [getDetail, detailState] = testSlice.useAction(testAsyncAction.getDetail)
