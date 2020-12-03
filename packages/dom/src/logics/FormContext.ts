@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createReducer, IReducerMap } from '@react-kits/common'
+import { createReducer, IReducerMap } from '@react-kits/base'
 
 const FORM_INITIAL_STATE = 'FORM_INITIAL_STATE'
 const FORM_UPDATE_DATA = 'FORM_UPDATE_DATA'

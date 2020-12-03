@@ -5,7 +5,7 @@ import _cloneDeep from 'lodash/cloneDeep'
 import _assign from 'lodash/assign'
 import { useScopedAction, useScopedSelector } from './hooks'
 import { xArray, xType } from '@basic-kits/js'
-import { usePreviousWithNull } from '@react-kits/common'
+import { usePreviousWithNull } from '@react-kits/base'
 import { Dispatch } from 'redux'
 import { storeInstance } from './store'
 

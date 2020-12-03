@@ -25,7 +25,7 @@
   "dependencies": {
     "@basic-kits/dom": "^0.0.7",
     "@basic-kits/js": "^0.0.4",
-    "@react-kits/common": "^0.0.5",
+    "@react-kits/base": "^0.0.1",
     "immer": "^5.1.0",
     "lodash": "^4.17.15",
     "react": "^17.0.1",

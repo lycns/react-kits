@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createReducer } from '@react-kits/common'
+import { createReducer } from '@react-kits/base'
 
 const APP_TOGGLE_TOAST = 'APP_TOGGLE_TOAST'
 const APP_CHNAGE_THEME = 'APP_CHNAGE_THEME'
