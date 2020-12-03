@@ -13,7 +13,7 @@
     "init": "yarn install && lerna bootstrap --use-workspaces && npm run build",
     "build": "lerna run --stream --sort build",
     "build:prod": "npm run clean:cache && npm run build",
-    "build:pub": "npm run build:prod && lerna publish",
+    "build:pub": "npm run build:prod && lerna publish -y",
     "clean": "lerna clean -y && npm run clean:cache",
     "clean:cache": "lerna exec --parallel -- rimraf .tsbuildcache lib",
     "clean:init": "npm run clean && npm run init",

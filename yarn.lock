@@ -977,10 +977,10 @@
   resolved "https://registry.yarnpkg.com/@base2/pretty-print-object/-/pretty-print-object-1.0.0.tgz#860ce718b0b73f4009e153541faff2cb6b85d047"
   integrity sha512-4Th98KlMHr5+JkxfcoDT//6vY8vM+iSPrLNpHhRyLx2CFYi8e2RfqPLdpbnpo0Q5lQC5hNB79yes07zb02fvCw==
 
-"@basic-kits/dom@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@basic-kits/dom/-/dom-0.0.4.tgz#475f4aabe108ba31834377fa7b0fe92ba73d9c7e"
-  integrity sha512-NeU4odTK8tBzHYWQ0UIna3G50EiKIcvZLw/npBn5WLrJvt8cVdOcCwX9pNOao8F0/NJZS+3x6sQyQ0wt/oeh4A==
+"@basic-kits/dom@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@basic-kits/dom/-/dom-0.0.7.tgz#7c75e6e44a733eaef8aceef858fdea118d39b664"
+  integrity sha512-o/6V+vwZ7WuL7G5Jhwn1k3vxEsPS2Qs9B8P9aLKMNjHCgAir634Alb6noFk9l6jxPJLdVPwjd2XtLC+2iRRUWQ==
   dependencies:
     "@basic-kits/ua" "^0.0.4"
 
