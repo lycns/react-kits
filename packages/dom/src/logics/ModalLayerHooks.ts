@@ -89,3 +89,21 @@ export function useModalStatus(uuid: string) {
   const shown = usePopupShown(hidden)
   return { opened, shown }
 }
+
+export function useModalCloseAll(timeout: number) {
+    const { modals, hide, close } = useModalContext()
+    const onHide = (uuid: string) => {
+        hide(uuid)
+        if (timeout === 0) {
+            return
+        }
+        setTimeout(() => {
+          close(uuid)   
+        }, timeout)
+    }
+    return React.useCallback(() => {
+        for (const uuid of Object.keys(modals)) {
+            onHide(uuid)
+        }
+    }, [modals])
+  }
