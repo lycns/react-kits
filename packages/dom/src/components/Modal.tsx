@@ -12,33 +12,16 @@ import { useModalStatus, useModalClose } from '../logics/ModalLayerHooks'
 
 const cx = transformStyles(styles)
 
-type IDrawerModalProps = IPopupProps & {
+type IModalProps = IPopupProps & {
   children: React.ReactElement
   uuid: string
   className?: string
   layerClose?: boolean
 }
 
-const TModal: React.FC<IDrawerModalProps> = (props) => {
-  const { uuid, children, className, layerClose = true, } = props
-  const { shown } = useModalStatus(uuid)
-  const [ onHide, onClose ] = useModalClose(uuid, 500)
 
-  return (
-    <div
-      className={cx('modal', className, { shown })}
-      onClick={layerClose ? onHide : undefined}
-      onTransitionEnd={onClose}
-    >
-      {cloneModalContent(children)}
-    </div>
-  )
-}
-
-export const Modal = enhancePopupComponent(TModal)
-
-const TModalOverlay: React.FC<IDrawerModalProps> = (props) => {
-  const { uuid, children, className, layerClose = true, } = props
+const TModal: React.FC<IModalProps> = (props) => {
+  const { uuid, children, className, layerClose = true } = props
   const { shown } = useModalStatus(uuid)
   const [ onHide, onClose ] = useModalClose(uuid, 500)
   const onOverlayClose = usePopupOverlayClose(shown, onClose)
@@ -54,4 +37,4 @@ const TModalOverlay: React.FC<IDrawerModalProps> = (props) => {
   )
 }
 
-export const ModalOverlay = enhancePopupComponent(TModalOverlay)
+export const Modal = enhancePopupComponent(TModal)

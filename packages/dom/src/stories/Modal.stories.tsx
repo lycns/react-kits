@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, ModalOverlay } from '../components/Modal'
+import { Modal } from '../components/Modal'
 import {
   useAppContext,
   useThemeStyles,
@@ -38,9 +38,9 @@ const TestModal = (props: any) => {
   const { uuid } = props
   const modal = useModal(({ uuid }) => <TestModal uuid={uuid} />)
   return (
-    <ModalOverlay uuid={uuid}>
+    <Modal uuid={uuid}>
       <div className={cx('test')} onClick={modal.show}>Toggle Modal Test2</div>
-    </ModalOverlay>
+    </Modal>
   )
 }
 

@@ -28,6 +28,7 @@ export function useModalContext() {
   return React.useContext<any>(ModalContext)
 }
 
+
 export function cloneModalContent(children: any) {
   return React.cloneElement(children, {
     onClick: (e: React.MouseEvent) => {
