@@ -1,0 +1,16 @@
+{
+  "name": "iosproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@react-native-community/cli-platform-ios": "^4.10.1",
+    "react-native": "^0.63.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
