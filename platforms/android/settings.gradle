@@ -1,0 +1,6 @@
+include ':app'
+
+rootProject.name = "ReactNativeCross"
+
+// include ':react-native-video'
+// project(':react-native-video').projectDir = new File(rootProject.projectDir, 'jscross/node_modules/react-native-video/android')
