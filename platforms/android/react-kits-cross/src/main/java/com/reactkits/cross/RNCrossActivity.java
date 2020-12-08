@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +36,11 @@ import okhttp3.Response;
 
 public class RNCrossActivity extends AppCompatActivity {
     public static final String TAG = "RNCrossActivity";
-    public static final String SP_STORE_NAME = "rn-cross";
     public static final String RN_BUNDLE_LOCAL_PATH = File.separator + "rn-modules";
     public static final String JS_BUNDLE_SUFFIX =  File.separator + "index.android.bundle";
     public static final String BUNDLE_REMOTE_SUFFIX_URL = "/android/index.json";
+    public static final String SP_STORE_NAME = "rn-cross";
+
 
 //    public static final String BUNDLE_REMOTE_URL = "https://public.smoex.com/master-native/android/app.json";
 
@@ -46,12 +48,16 @@ public class RNCrossActivity extends AppCompatActivity {
     private ReactInstanceManager mReactInstanceManager;
     private ReactInstanceManagerBuilder mBuilder;
 
-
+    private String mStoreName;
     private String mModuleName;
     private String mModuleMd5;
     private String mDownloadUrl;
     private String mLocalPath;
     private String mRootPath;
+    private String mPublicUrl;
+    private String mSearch;
+    private String mHref;
+    private String mPath = "/";
     private boolean loadedBundle;
 
     @Override
@@ -70,13 +76,44 @@ public class RNCrossActivity extends AppCompatActivity {
     protected void initReactContent(String publicUrl, List<ReactPackage> reactPackages) {
 //        resetRemoteValue();
 //        resetLocalValue();
+        mHref = publicUrl;
+        if (publicUrl.indexOf("#") > 0) {
+            String[] m = publicUrl.split("#");
+            mPublicUrl = m[0];
+            Log.i(TAG, m[1]);
+
+            if (m[1].indexOf("?") > 0) {
+                String[] n = m[1].split("\\?");
+                mPath = n[0];
+                mSearch = n[1];
+            } else {
+                mPath = m[1];
+            }
+
+        } else if (publicUrl.indexOf("?") > 0) {
+            String[] m = publicUrl.split("\\?");
+            mPublicUrl = m[0];
+            mSearch = "?" + m[1];
+        } else  {
+            mPublicUrl = publicUrl;
+            mSearch = "";
+        }
+
+        try {
+            mStoreName = SP_STORE_NAME + "_" + HashUtils.md5(mPublicUrl);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        Log.i(TAG, mPublicUrl + "---" + mSearch);
+
 
         SoLoader.init(this, false);
         loadedBundle = false;
         preloadBundleFile();
 
 
-        String configUrl = publicUrl + BUNDLE_REMOTE_SUFFIX_URL;
+        String configUrl = mPublicUrl + BUNDLE_REMOTE_SUFFIX_URL;
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(configUrl).get().build();
         okHttpClient.newCall(request).enqueue(new Callback() {
@@ -98,7 +135,7 @@ public class RNCrossActivity extends AppCompatActivity {
                     mRootPath = RN_BUNDLE_LOCAL_PATH + File.separator + mModuleName;
                     mLocalPath =  mRootPath + File.separator + mModuleMd5;
 
-                    SharedPreferences pref = getSharedPreferences(SP_STORE_NAME, MODE_PRIVATE);
+                    SharedPreferences pref = getSharedPreferences(mStoreName, MODE_PRIVATE);
                     // 已经下载完成的 bundle path
                     String remotePath = pref.getString("remotePath", "");
 
@@ -117,12 +154,12 @@ public class RNCrossActivity extends AppCompatActivity {
     }
 
     private void resetRemoteValue() {
-        SharedPreferences.Editor editor = getSharedPreferences(SP_STORE_NAME, MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getSharedPreferences(mStoreName, MODE_PRIVATE).edit();
         editor.putString("remotePath", "");
         editor.apply();
     }
     private void resetLocalValue() {
-        SharedPreferences.Editor editor = getSharedPreferences(SP_STORE_NAME, MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getSharedPreferences(mStoreName, MODE_PRIVATE).edit();
         editor.putString("localPath", "");
         editor.apply();
     }
@@ -151,7 +188,7 @@ public class RNCrossActivity extends AppCompatActivity {
 
 
     private void preloadBundleFile() {
-        SharedPreferences pref = getSharedPreferences(SP_STORE_NAME, MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(mStoreName, MODE_PRIVATE);
         // 解压完成并且正在使用的 bundle path
         String localPath = pref.getString("localPath", "");
         String moduleName = pref.getString("moduleName", "");
@@ -197,7 +234,7 @@ public class RNCrossActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String path) {
                 Log.i(TAG, "下载成功！ path: " + path);
-                SharedPreferences.Editor editor = getSharedPreferences(SP_STORE_NAME, MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = getSharedPreferences(mStoreName, MODE_PRIVATE).edit();
                 editor.putString("remotePath", mLocalPath);
                 editor.putString("remoteMd5", mModuleMd5);
                 editor.apply();
@@ -215,6 +252,10 @@ public class RNCrossActivity extends AppCompatActivity {
         downloadUtils.download(mDownloadUrl, mLocalPath + ".zip");
     }
 
+    protected boolean getDeveloperSupport() {
+        return false;
+    }
+
     private void loadBundleFromFile(File file) {
         List<ReactPackage> packages = getPackages();
         if (packages == null) {
@@ -230,7 +271,7 @@ public class RNCrossActivity extends AppCompatActivity {
                 // hot load https://10.0.2.2/index.js 文件
                 .setJSMainModulePath("index")
                 .addPackages(packages)
-//            .setUseDeveloperSupport(BuildConfiig.DEBUG)
+                .setUseDeveloperSupport(getDeveloperSupport())
                 .setInitialLifecycleState(LifecycleState.RESUMED);
 
         Log.i(TAG, "JS FILE: " + file.getAbsolutePath());
@@ -239,11 +280,18 @@ public class RNCrossActivity extends AppCompatActivity {
         // set content view
         mReactRootView = new ReactRootView(this);
         mReactInstanceManager = mBuilder.build();
-        mReactRootView.startReactApplication(mReactInstanceManager, mModuleName, null);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("publicUrl", mPublicUrl);
+        bundle.putString("search", mSearch);
+        bundle.putString("href", mHref);
+        bundle.putString("path", mPath);
+
+        mReactRootView.startReactApplication(mReactInstanceManager, mModuleName, bundle);
         setContentView(mReactRootView);
 
         loadedBundle = true;
-        SharedPreferences.Editor editor = getSharedPreferences(SP_STORE_NAME, MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getSharedPreferences(mStoreName, MODE_PRIVATE).edit();
         editor.putString("localPath", mLocalPath);
         editor.putString("moduleName", mModuleName);
         editor.apply();

@@ -8,12 +8,17 @@ import com.reactkits.cross.RNCrossActivity;
 
 
 public class ReactNativeActivity extends RNCrossActivity {
-    public static final String REMOTE_URL = "https://public.smoex.com/master-native";
+    public static final String REMOTE_URL = "https://public.smoex.com/master-native#/home?route=/path";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initReactContent(REMOTE_URL);
+    }
+
+    @Override
+    protected boolean getDeveloperSupport() {
+        return BuildConfig.DEBUG;
     }
 
     //    private ReactRootView mReactRootView;

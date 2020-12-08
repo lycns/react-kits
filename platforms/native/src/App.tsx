@@ -27,7 +27,16 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 declare const global: {HermesInternal: null | {}};
-const App = () => {
+
+type AppCrossProps = {
+  publicUrl: string
+  rootTag: number
+  href: string
+  path: string
+  search: string
+}
+const App: React.FC<AppCrossProps> = props => {
+  console.log(12312, props)
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -43,7 +52,7 @@ const App = () => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One 6666666</Text>
+              <Text style={styles.sectionTitle}>Step One 7897</Text>
               <Text style={styles.sectionDescription}>
                 Edit <Text style={styles.highlight}>App.tsx</Text> to change this
                 screen and then come back to see your edits.
