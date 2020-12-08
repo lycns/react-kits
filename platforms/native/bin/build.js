@@ -74,7 +74,7 @@ exec(commend, (error, stdout, stderr) => {
         json.md5 = md5
         json.downloadUrl = `${json.publicUrl}/${platform}/${md5}.zip`
 
-        fs.writeFile(path.resolve(rootDir + '/app.json'), JSON.stringify(json), { encoding: 'utf8' }, err => {})
+        fs.writeFile(path.resolve(rootDir + '/index.json'), JSON.stringify(json), { encoding: 'utf8' }, err => {})
 
     })
 })

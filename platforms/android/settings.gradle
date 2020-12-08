@@ -1,3 +1,4 @@
+include ':react-kits-cross'
 include ':app'
 
 rootProject.name = "ReactNativeCross"

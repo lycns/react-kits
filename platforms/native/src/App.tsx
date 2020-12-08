@@ -27,7 +27,6 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 declare const global: {HermesInternal: null | {}};
-
 const App = () => {
   return (
     <>
@@ -44,7 +43,7 @@ const App = () => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One 1234</Text>
+              <Text style={styles.sectionTitle}>Step One 6666666</Text>
               <Text style={styles.sectionDescription}>
                 Edit <Text style={styles.highlight}>App.tsx</Text> to change this
                 screen and then come back to see your edits.
@@ -63,6 +62,11 @@ const App = () => {
   );
 };
 
+// 无缓存: 请求 -> 下载 -> 解压 -> 渲染 -> 结束
+// 有缓存: 渲染 -> 请求
+//    请求无更新: -> 结束
+//    请求有更新: -> 无缓存 ? 下载 -> 结束
+//    缓存无更新: 
 // load default -> get app config -> need download -> loading callback -> download zip -> unzip -> loaded callback -> done
 // load default -> get app config -> didn't need download -> done
 

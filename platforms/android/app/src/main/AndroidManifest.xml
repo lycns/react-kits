@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.reactkits.main.DownloadActivity"></activity>
+
+        <activity android:name="com.reactkits.main.DownloadActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -27,16 +28,24 @@
         </provider>
 
         <activity android:name="com.reactkits.main.MainActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name="com.reactkits.main.ReactNativeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.reactkits.main.ReactNativeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+<!--        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />-->
     </application>
 
 </manifest>
