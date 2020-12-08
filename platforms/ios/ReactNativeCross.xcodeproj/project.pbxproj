@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9CFDF1847D4A50A6F068D0FA /* Pods_IOSxRN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEA24D5FCBD87FC479EAEF4 /* Pods_IOSxRN.framework */; };
+		187686106E79D886BCC3D82F /* Pods_ReactNativeCross.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C8F4E3C5609A619CD9EE35A /* Pods_ReactNativeCross.framework */; };
 		AAB8E71124F7944C00904BD6 /* DownLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB8E71024F7944C00904BD6 /* DownLoader.swift */; };
 		AAB8E71324F7948000904BD6 /* FileTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB8E71224F7948000904BD6 /* FileTool.swift */; };
 		AAD7B9D524D25DBA00D69A24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7B9D424D25DBA00D69A24 /* AppDelegate.swift */; };
@@ -20,11 +20,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A26F921E1FE3D7777295E40 /* Pods-ReactNativeCross.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeCross.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeCross/Pods-ReactNativeCross.debug.xcconfig"; sourceTree = "<group>"; };
+		2C8F4E3C5609A619CD9EE35A /* Pods_ReactNativeCross.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactNativeCross.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		58B2871C1BE98CCFBDBF5106 /* Pods-ReactNativeCross.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeCross.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeCross/Pods-ReactNativeCross.release.xcconfig"; sourceTree = "<group>"; };
 		680D78364B655C1D67D21FA2 /* Pods-IOSxRN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOSxRN.debug.xcconfig"; path = "Target Support Files/Pods-IOSxRN/Pods-IOSxRN.debug.xcconfig"; sourceTree = "<group>"; };
 		6A0A6ED21883B0B9E320A481 /* Pods-IOSxRN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOSxRN.release.xcconfig"; path = "Target Support Files/Pods-IOSxRN/Pods-IOSxRN.release.xcconfig"; sourceTree = "<group>"; };
 		AAB8E71024F7944C00904BD6 /* DownLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownLoader.swift; sourceTree = "<group>"; };
 		AAB8E71224F7948000904BD6 /* FileTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTool.swift; sourceTree = "<group>"; };
-		AAD7B9D124D25DBA00D69A24 /* IOSxRN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSxRN.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAD7B9D124D25DBA00D69A24 /* ReactNativeCross.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactNativeCross.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD7B9D424D25DBA00D69A24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAD7B9D624D25DBA00D69A24 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AAD7B9D824D25DBA00D69A24 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,7 +36,6 @@
 		AAD7B9E024D25DBA00D69A24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AAD7B9E224D25DBA00D69A24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAD7B9E824D2E34800D69A24 /* Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Bundle.bundle; sourceTree = "<group>"; };
-		EAEA24D5FCBD87FC479EAEF4 /* Pods_IOSxRN.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IOSxRN.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CFDF1847D4A50A6F068D0FA /* Pods_IOSxRN.framework in Frameworks */,
+				187686106E79D886BCC3D82F /* Pods_ReactNativeCross.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +55,8 @@
 			children = (
 				680D78364B655C1D67D21FA2 /* Pods-IOSxRN.debug.xcconfig */,
 				6A0A6ED21883B0B9E320A481 /* Pods-IOSxRN.release.xcconfig */,
+				1A26F921E1FE3D7777295E40 /* Pods-ReactNativeCross.debug.xcconfig */,
+				58B2871C1BE98CCFBDBF5106 /* Pods-ReactNativeCross.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -60,7 +64,7 @@
 		A184049EFC92702067B53C26 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EAEA24D5FCBD87FC479EAEF4 /* Pods_IOSxRN.framework */,
+				2C8F4E3C5609A619CD9EE35A /* Pods_ReactNativeCross.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -68,7 +72,7 @@
 		AAD7B9C824D25DBA00D69A24 = {
 			isa = PBXGroup;
 			children = (
-				AAD7B9D324D25DBA00D69A24 /* IOSxRN */,
+				AAD7B9D324D25DBA00D69A24 /* ReactNativeCross */,
 				AAD7B9D224D25DBA00D69A24 /* Products */,
 				9C219BDA994CF82E3B6C240A /* Pods */,
 				A184049EFC92702067B53C26 /* Frameworks */,
@@ -78,12 +82,12 @@
 		AAD7B9D224D25DBA00D69A24 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AAD7B9D124D25DBA00D69A24 /* IOSxRN.app */,
+				AAD7B9D124D25DBA00D69A24 /* ReactNativeCross.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AAD7B9D324D25DBA00D69A24 /* IOSxRN */ = {
+		AAD7B9D324D25DBA00D69A24 /* ReactNativeCross */ = {
 			isa = PBXGroup;
 			children = (
 				AAD7B9D424D25DBA00D69A24 /* AppDelegate.swift */,
@@ -97,15 +101,15 @@
 				AAB8E71024F7944C00904BD6 /* DownLoader.swift */,
 				AAB8E71224F7948000904BD6 /* FileTool.swift */,
 			);
-			path = IOSxRN;
+			path = ReactNativeCross;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AAD7B9D024D25DBA00D69A24 /* IOSxRN */ = {
+		AAD7B9D024D25DBA00D69A24 /* ReactNativeCross */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AAD7B9E524D25DBA00D69A24 /* Build configuration list for PBXNativeTarget "IOSxRN" */;
+			buildConfigurationList = AAD7B9E524D25DBA00D69A24 /* Build configuration list for PBXNativeTarget "ReactNativeCross" */;
 			buildPhases = (
 				BAED729CA55B9E9E357EFE40 /* [CP] Check Pods Manifest.lock */,
 				AAD7B9CD24D25DBA00D69A24 /* Sources */,
@@ -117,9 +121,9 @@
 			);
 			dependencies = (
 			);
-			name = IOSxRN;
+			name = ReactNativeCross;
 			productName = IOSxRN;
-			productReference = AAD7B9D124D25DBA00D69A24 /* IOSxRN.app */;
+			productReference = AAD7B9D124D25DBA00D69A24 /* ReactNativeCross.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -137,7 +141,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AAD7B9CC24D25DBA00D69A24 /* Build configuration list for PBXProject "IOSxRN" */;
+			buildConfigurationList = AAD7B9CC24D25DBA00D69A24 /* Build configuration list for PBXProject "ReactNativeCross" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -150,7 +154,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AAD7B9D024D25DBA00D69A24 /* IOSxRN */,
+				AAD7B9D024D25DBA00D69A24 /* ReactNativeCross */,
 			);
 		};
 /* End PBXProject section */
@@ -176,15 +180,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IOSxRN/Pods-IOSxRN-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeCross/Pods-ReactNativeCross-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IOSxRN/Pods-IOSxRN-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeCross/Pods-ReactNativeCross-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IOSxRN/Pods-IOSxRN-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeCross/Pods-ReactNativeCross-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BAED729CA55B9E9E357EFE40 /* [CP] Check Pods Manifest.lock */ = {
@@ -202,7 +206,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IOSxRN-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ReactNativeCross-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -362,16 +366,16 @@
 		};
 		AAD7B9E624D25DBA00D69A24 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 680D78364B655C1D67D21FA2 /* Pods-IOSxRN.debug.xcconfig */;
+			baseConfigurationReference = 1A26F921E1FE3D7777295E40 /* Pods-ReactNativeCross.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = IOSxRN/Info.plist;
+				INFOPLIST_FILE = ReactNativeCross/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bbq.IOSxRN;
+				PRODUCT_BUNDLE_IDENTIFIER = reactkits.ReactNativeCross;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -380,16 +384,16 @@
 		};
 		AAD7B9E724D25DBA00D69A24 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A0A6ED21883B0B9E320A481 /* Pods-IOSxRN.release.xcconfig */;
+			baseConfigurationReference = 58B2871C1BE98CCFBDBF5106 /* Pods-ReactNativeCross.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = IOSxRN/Info.plist;
+				INFOPLIST_FILE = ReactNativeCross/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bbq.IOSxRN;
+				PRODUCT_BUNDLE_IDENTIFIER = reactkits.ReactNativeCross;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -399,7 +403,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AAD7B9CC24D25DBA00D69A24 /* Build configuration list for PBXProject "IOSxRN" */ = {
+		AAD7B9CC24D25DBA00D69A24 /* Build configuration list for PBXProject "ReactNativeCross" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAD7B9E324D25DBA00D69A24 /* Debug */,
@@ -408,7 +412,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AAD7B9E524D25DBA00D69A24 /* Build configuration list for PBXNativeTarget "IOSxRN" */ = {
+		AAD7B9E524D25DBA00D69A24 /* Build configuration list for PBXNativeTarget "ReactNativeCross" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAD7B9E624D25DBA00D69A24 /* Debug */,

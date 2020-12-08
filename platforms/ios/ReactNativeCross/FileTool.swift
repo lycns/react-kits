@@ -1,6 +1,6 @@
 //
 //  FileTool.swift
-//  IOSxRN
+//  ReactNativeCross
 //
 //  Created by 哔哩哔哩 on 2020/8/27.
 //  Copyright © 2020 test. All rights reserved.

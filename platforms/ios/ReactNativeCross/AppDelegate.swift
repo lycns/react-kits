@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  IOSxRN
+//  ReactNativeCross
 //
 //  Created by 哔哩哔哩 on 2020/7/30.
 //  Copyright © 2020 test. All rights reserved.

@@ -5,7 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 # use_frameworks!
 
 # # The target name is most likely the name of your project.
-# target 'IOSxRN' do
+# target 'ReactNativeCross' do
 
 #   # Your 'node_modules' directory is probably in the root of your project,
 #   # but if not, adjust the `:path` accordingly
@@ -35,7 +35,7 @@ require_relative '../native/node_modules/@react-native-community/cli-platform-io
 
 platform :ios, '10.0'
 
-target 'IOSxRN' do
+target 'ReactNativeCross' do
   use_frameworks!
   
   config = use_native_modules!

@@ -1,34 +1,45 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-node_modules
-.pnp
-.pnp.js
+uild/
+DerivedData/
 
-# testing
-/coverage
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
 
-# production
-build
-lib
-/Pods
+## Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
 
-# misc
+### Xcode Patch ###
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddat
+!*/xcuserdata/admin.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlista/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+
+
+# End of https://www.gitignore.io/api/xcode
+
+
+
+# Created by https://www.gitignore.io/api/cocoapods
+
+### CocoaPods ###
+## CocoaPods GitIgnore Template
+
+# CocoaPods - Only use to conserve bandwidth / Save time on Pushing
+#           - Also handy if you have a large number of dependant pods
+#           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGNORE THE LOCK FILE
+Pods/
+Podfile.lock
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# config
-config.yml
-
-# editor
-.idea
-.vscode
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-lerna-error.log*
