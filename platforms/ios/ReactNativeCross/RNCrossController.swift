@@ -34,6 +34,7 @@ class RNCrossController: UIViewController {
         preloadBundleFile()
         
         let configUrl = url.publicUrl + BUNDLE_REMOTE_SUFFIX_URL;
+        print(configUrl)
         FileTool.getRequest(url: configUrl) { (resp) -> Void in
             self.moduleName = resp["moduleName"] as! String
             self.downloadUrl = resp["downloadUrl"] as! String

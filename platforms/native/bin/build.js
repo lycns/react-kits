@@ -68,11 +68,26 @@ exec(commend, (error, stdout, stderr) => {
 
         fs.renameSync(rootDir + '/bundle.zip', rootDir + `/${md5}.zip`)
 
-        const appJSON = fs.readFileSync('./public/app.json', { encoding: "utf-8" })
-        const json = JSON.parse(appJSON)
+        const appStr = fs.readFileSync('./public/app.json', { encoding: "utf-8" })
+        // const buildStr = fs.readFileSync('./build/index.json', { encoding: "utf-8" })
+        const appjson = JSON.parse(appStr || '{}')
+        // const buildjson = JSON.parse(buildStr || '{}')
+        // console.log(buildStr)
+        
+        const platJson = {
+            md5: md5,
+            downloadUrl: `${appjson.publicUrl}/${platform}/${md5}.zip`,
+        }
 
-        json.md5 = md5
-        json.downloadUrl = `${json.publicUrl}/${platform}/${md5}.zip`
+        const json = {
+            ...appjson,
+            // ...buildjson,
+            ...platJson,
+        }
+        // json[platform] = platJson
+
+        // json.md5 = md5
+        // json.downloadUrl = `${json.publicUrl}/${platform}/${md5}.zip`
 
         fs.writeFile(path.resolve(rootDir + '/index.json'), JSON.stringify(json), { encoding: 'utf8' }, err => {})
 
