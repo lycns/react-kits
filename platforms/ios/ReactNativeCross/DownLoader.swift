@@ -101,8 +101,6 @@ class DownLoader: NSObject  {
 
 
 extension DownLoader : URLSessionDataDelegate {
-    
-    
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Swift.Void){
         
         print(response)
@@ -118,19 +116,29 @@ extension DownLoader : URLSessionDataDelegate {
         self.totalSize = CLongLong(stri)!
         
         self.tmpSize = FileTool.fileSize(self.downLoadingPath!)
-        print("\(self.downLoadingPath!)--\(self.totalSize)---\(self.tmpSize)")
+//        print("\(self.downLoadingPath!)--\(self.totalSize)---\(self.tmpSize)")
+//
+//        let thread:Thread = Thread {
+//            Thread.sleep(forTimeInterval: 0.1)
+//
+//            self.tmpSize = FileTool.fileSize(self.downLoadingPath!)
+//            print("\(self.downLoadingPath!)--\(self.totalSize)---\(self.tmpSize)")
+//
+//        }
+//
+//        thread.start()
         
        // 比对本地大小, 和 总大小
-        if (self.tmpSize == self.totalSize) {
-            
-            // 1. 移动到下载完成文件夹
-            print("移动文件到下载完成")
-            FileTool.makeDir(path: self.downedDir)
-            FileTool.moveFile(self.downLoadingPath!, self.downLoadedPath!)
-            // 2. 取消本次请求
-            completionHandler(URLSession.ResponseDisposition.cancel);
-            return;
-        }
+//        if (self.tmpSize == self.totalSize) {
+//
+//            // 1. 移动到下载完成文件夹
+//            print("移动文件到下载完成")
+//            FileTool.makeDir(path: self.downedDir)
+//            FileTool.moveFile(self.downLoadingPath!, self.downLoadedPath!)
+//            // 2. 取消本次请求
+//            completionHandler(URLSession.ResponseDisposition.cancel);
+//            return;
+//        }
         
         if (self.tmpSize > self.totalSize) {
             
@@ -179,10 +187,19 @@ extension DownLoader : URLSessionDataDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?){
         
         print("下载请求完成")
-        
-        
+         print("\(self.downLoadingPath!)--\(self.totalSize)---\(self.tmpSize)")
         if (error == nil) {
-            self.listener()
+            self.tmpSize = FileTool.fileSize(self.downLoadingPath!)
+            print("\(self.downLoadingPath!)--\(self.totalSize)---\(self.tmpSize)")
+            if (self.tmpSize == self.totalSize) {
+
+                // 1. 移动到下载完成文件夹
+                print("移动文件到下载完成")
+                FileTool.makeDir(path: self.downedDir)
+                FileTool.moveFile(self.downLoadingPath!, self.downLoadedPath!)
+                self.listener()
+                return;
+            }
             
             // 不一定是成功
             // 数据是肯定可以请求完毕

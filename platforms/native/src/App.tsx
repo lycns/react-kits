@@ -52,7 +52,7 @@ const App: React.FC<AppCrossProps> = props => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One 7897</Text>
+              <Text style={styles.sectionTitle}>Step One 4445</Text>
               <Text style={styles.sectionDescription}>
                 Edit <Text style={styles.highlight}>App.tsx</Text> to change this
                 screen and then come back to see your edits.
