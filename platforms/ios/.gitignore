@@ -24,7 +24,7 @@ xcuserdata/
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddat
 !*/xcuserdata/admin.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlista/
-!*.xcworkspace/contents.xcworkspacedata
+!*.xcworkspace/contents.xcworkspacedata 
 /*.gcno
 
 

@@ -10,6 +10,8 @@
 		187686106E79D886BCC3D82F /* Pods_ReactNativeCross.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C8F4E3C5609A619CD9EE35A /* Pods_ReactNativeCross.framework */; };
 		AAB8E71124F7944C00904BD6 /* DownLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB8E71024F7944C00904BD6 /* DownLoader.swift */; };
 		AAB8E71324F7948000904BD6 /* FileTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB8E71224F7948000904BD6 /* FileTool.swift */; };
+		AABA7810257FA1A90077209C /* RNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA780F257FA1A90077209C /* RNViewController.swift */; };
+		AABA78142580714D0077209C /* RNCrossController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA78132580714D0077209C /* RNCrossController.swift */; };
 		AAD7B9D524D25DBA00D69A24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7B9D424D25DBA00D69A24 /* AppDelegate.swift */; };
 		AAD7B9D724D25DBA00D69A24 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7B9D624D25DBA00D69A24 /* SceneDelegate.swift */; };
 		AAD7B9D924D25DBA00D69A24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7B9D824D25DBA00D69A24 /* ViewController.swift */; };
@@ -27,6 +29,9 @@
 		6A0A6ED21883B0B9E320A481 /* Pods-IOSxRN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOSxRN.release.xcconfig"; path = "Target Support Files/Pods-IOSxRN/Pods-IOSxRN.release.xcconfig"; sourceTree = "<group>"; };
 		AAB8E71024F7944C00904BD6 /* DownLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownLoader.swift; sourceTree = "<group>"; };
 		AAB8E71224F7948000904BD6 /* FileTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTool.swift; sourceTree = "<group>"; };
+		AABA780F257FA1A90077209C /* RNViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNViewController.swift; sourceTree = "<group>"; };
+		AABA78122580705B0077209C /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
+		AABA78132580714D0077209C /* RNCrossController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNCrossController.swift; sourceTree = "<group>"; };
 		AAD7B9D124D25DBA00D69A24 /* ReactNativeCross.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactNativeCross.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD7B9D424D25DBA00D69A24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAD7B9D624D25DBA00D69A24 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +105,9 @@
 				AAD7B9E824D2E34800D69A24 /* Bundle.bundle */,
 				AAB8E71024F7944C00904BD6 /* DownLoader.swift */,
 				AAB8E71224F7948000904BD6 /* FileTool.swift */,
+				AABA780F257FA1A90077209C /* RNViewController.swift */,
+				AABA78122580705B0077209C /* Bridge.h */,
+				AABA78132580714D0077209C /* RNCrossController.swift */,
 			);
 			path = ReactNativeCross;
 			sourceTree = "<group>";
@@ -220,7 +228,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AABA7810257FA1A90077209C /* RNViewController.swift in Sources */,
 				AAD7B9D924D25DBA00D69A24 /* ViewController.swift in Sources */,
+				AABA78142580714D0077209C /* RNCrossController.swift in Sources */,
 				AAD7B9D524D25DBA00D69A24 /* AppDelegate.swift in Sources */,
 				AAB8E71124F7944C00904BD6 /* DownLoader.swift in Sources */,
 				AAB8E71324F7948000904BD6 /* FileTool.swift in Sources */,
@@ -377,6 +387,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = reactkits.ReactNativeCross;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/ReactNativeCross/Bridge.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -395,6 +406,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = reactkits.ReactNativeCross;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/ReactNativeCross/Bridge.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

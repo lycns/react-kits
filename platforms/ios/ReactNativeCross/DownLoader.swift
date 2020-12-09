@@ -28,11 +28,20 @@ class DownLoader: NSObject  {
         
     }()
     
+    fileprivate var listener: () -> Void = {}
+    fileprivate var dir = ""
+    
+    var downedDir = ""
+    
+    func addDownListener(callback: @escaping () -> Void) {
+        self.listener = callback
+    }
+    
     func getFilePath() -> String {
         return self.downLoadedPath!
     }
     
-    func downLoader(url : NSURL) {
+    func downLoader(url : NSURL, dir: String) {
         
         let fileName = url.lastPathComponent
 
@@ -41,16 +50,23 @@ class DownLoader: NSObject  {
             return
         }
         
-        self.downLoadingPath = kTempPath + "/" + fileName!
-        self.downLoadedPath = kCachePath! + "/" + fileName!
+        self.downedDir = kCachePath! + "/" + dir
+        self.downLoadingPath = kTempPath + fileName!
+        self.downLoadedPath = kCachePath! + "/" + dir + "/" + fileName!
+        self.dir = dir
+        
+//        FileTool.makeDir(path: self.downingDir)
+        
         
         //检查当前路径是否已经下载了该文件
         if FileTool.fileExists(filePath: self.downLoadedPath!) {
-            print("文件以及下载完成")
+            print("文件已经下载完成")
+            self.listener()
             return
         }
         
         print(self.downLoadingPath ?? "")
+        print(FileTool.fileExists(filePath: self.downLoadingPath!))
         
         //如果没有下载完成 就看是否有临时文件
         if !FileTool.fileExists(filePath: self.downLoadingPath!) {
@@ -86,6 +102,7 @@ class DownLoader: NSObject  {
 
 extension DownLoader : URLSessionDataDelegate {
     
+    
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Swift.Void){
         
         print(response)
@@ -100,13 +117,15 @@ extension DownLoader : URLSessionDataDelegate {
                 
         self.totalSize = CLongLong(stri)!
         
-        
+        self.tmpSize = FileTool.fileSize(self.downLoadingPath!)
+        print("\(self.downLoadingPath!)--\(self.totalSize)---\(self.tmpSize)")
         
        // 比对本地大小, 和 总大小
         if (self.tmpSize == self.totalSize) {
             
             // 1. 移动到下载完成文件夹
             print("移动文件到下载完成")
+            FileTool.makeDir(path: self.downedDir)
             FileTool.moveFile(self.downLoadingPath!, self.downLoadedPath!)
             // 2. 取消本次请求
             completionHandler(URLSession.ResponseDisposition.cancel);
@@ -122,7 +141,7 @@ extension DownLoader : URLSessionDataDelegate {
             
             // 2. 从0 开始下载
             print("重新开始下载")
-            self.downLoader(url: resp.url! as NSURL)
+            self.downLoader(url: resp.url! as NSURL, dir: self.dir)
             //             [self downLoadWithURL:response.URL offset:0];
             // 3. 取消请求
             completionHandler(URLSession.ResponseDisposition.cancel);
@@ -139,8 +158,6 @@ extension DownLoader : URLSessionDataDelegate {
         
         self.outputStream?.open()
         completionHandler(URLSession.ResponseDisposition.allow);
-        
-        
         
     }
     
@@ -161,10 +178,11 @@ extension DownLoader : URLSessionDataDelegate {
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?){
         
-        print("请求完成")
+        print("下载请求完成")
         
         
         if (error == nil) {
+            self.listener()
             
             // 不一定是成功
             // 数据是肯定可以请求完毕
@@ -172,7 +190,7 @@ extension DownLoader : URLSessionDataDelegate {
             // 如果等于 => 验证, 是否文件完整(file md5 )
            
         }else {
-            print("有问题")
+            print("有问题\(error)")
         }
       
         self.outputStream?.close()
