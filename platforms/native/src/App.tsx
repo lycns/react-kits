@@ -16,6 +16,7 @@ import {
   View,
   Text,
   StatusBar,
+  Dimensions,
 } from 'react-native';
 
 import {
@@ -36,7 +37,6 @@ type AppCrossProps = {
   search: string
 }
 const App: React.FC<AppCrossProps> = props => {
-  console.log(12312, props)
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -52,7 +52,7 @@ const App: React.FC<AppCrossProps> = props => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One 4442</Text>
+              <Text style={styles.sectionTitle}>Step One 7979878978</Text>
               <Text style={styles.sectionDescription}>
                 Edit <Text style={styles.highlight}>App.tsx</Text> to change this
                 screen and then come back to see your edits.
@@ -82,6 +82,7 @@ const App: React.FC<AppCrossProps> = props => {
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
+    height: '100%'
   },
   engine: {
     position: 'absolute',

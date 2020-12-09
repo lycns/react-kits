@@ -27,6 +27,13 @@ class RNCrossController: UIViewController {
     var href = ""
     
     open func initReactContent(publicUrl: String) {
+//        let jsCodeLocation = URL(string: "http://localhost:8081/index.bundle?platform=ios")
+//        self.moduleName = "ReactKitsTest"
+//        loadBundleFromUrl(jsCodeLocation: jsCodeLocation!)
+//        return
+//            
+            
+            
         self.href = publicUrl
         let url = getUrlInfo(url: publicUrl)
         storeName = "rn-cross_" + url.publicUrl.md5 + ".plist"
@@ -34,7 +41,7 @@ class RNCrossController: UIViewController {
         preloadBundleFile()
         
         let configUrl = url.publicUrl + BUNDLE_REMOTE_SUFFIX_URL;
-        print(configUrl)
+        print("request URL: " + configUrl)
         FileTool.getRequest(url: configUrl) { (resp) -> Void in
             self.moduleName = resp["moduleName"] as! String
             self.downloadUrl = resp["downloadUrl"] as! String
@@ -44,6 +51,14 @@ class RNCrossController: UIViewController {
             
             self.rootPath = "/rn-modules" + "/" + self.moduleName
             self.localPath = self.rootPath + "/" + self.moduleMd5
+            
+            let values = self.readInfo();
+            let remotePath = values["remotePath"] as? String
+            
+            // 如果缓存路径与远程路径一致，则不做任何处理
+            if (!self.isEmptyString(str: remotePath) && remotePath == self.localPath) {
+                return
+            }
             
             DispatchQueue.main.async {
                 self.startDownload()
@@ -121,10 +136,10 @@ class RNCrossController: UIViewController {
 
   
     func preloadBundleFile() {
-        
-        self.resetRemoteValue();
-        self.resetLocalValue();
-        
+//
+//        self.resetRemoteValue();
+//        self.resetLocalValue();
+//
         let values = readInfo()
         
         // 解压完成并且正在使用的 bundle path
@@ -135,10 +150,36 @@ class RNCrossController: UIViewController {
         let remotePath = values["remotePath"] as? String
         let remoteMd5 = values["remoteMd5"] as? String
         
+        print("localPath: \(localPath), moduleName: \(moduleName), remotePath: \(remotePath), remoteMd5: \(remoteMd5)")
+        
         if (isEmptyString(str: localPath) || isEmptyString(str: moduleName)) {
             self.resetRemoteValue();
             self.resetLocalValue();
             return;
+        }
+        
+      //如果文件路径发生变动
+        if (!isEmptyString(str: remotePath) && localPath != remotePath) {
+            self.localPath = remotePath!;
+            self.moduleName = moduleName!;
+            self.moduleName = remoteMd5!;
+            self.rootPath = "/rn-modules" + "/" + self.moduleName
+            if (!isEmptyString(str: remoteMd5)) {
+                UnzipFile();
+            } else {
+                resetRemoteValue();
+                resetLocalValue();
+            }
+            return;
+        }
+        
+        self.localPath = localPath!
+        self.moduleName = moduleName!
+        let targetPath = kCachePath! + self.localPath
+        let filepath = targetPath + "/index.ios.bundle"
+        if (FileTool.fileExists(filePath: filepath)) {
+            let jsCodeLocation = URL(fileURLWithPath: filepath)
+            loadBundleFromUrl(jsCodeLocation: jsCodeLocation);
         }
         
         
@@ -205,6 +246,11 @@ class RNCrossController: UIViewController {
       )
       self.view = rootView
     self.loadedBundle = true
+    
+    var values = self.readInfo()
+    values["localPath"] = self.localPath
+    values["moduleName"] = self.moduleName
+    self.writeInfo(info: values)
   }
       
   func isEmptyString(str: String?) -> Bool {
