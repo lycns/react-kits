@@ -5,7 +5,7 @@ import ZIPFoundation
 import Foundation
 
 class RNViewController: RNCrossController {
-    var REMOTE_URL = "https://public.smoex.com/master-native#/home?route=/path"
+    var REMOTE_URL = "https://public.smoex.com/master-native?route=/path"
     override func viewDidLoad() {
         super.viewDidLoad()
         super.initReactContent(publicUrl: REMOTE_URL)

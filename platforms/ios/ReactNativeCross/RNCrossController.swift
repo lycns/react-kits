@@ -6,6 +6,7 @@ import Foundation
 struct RNUrl {
     var search: String
     var publicUrl: String
+    var path: String
 }
 
 private let kCachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
@@ -31,8 +32,7 @@ class RNCrossController: UIViewController {
 //        self.moduleName = "ReactKitsTest"
 //        loadBundleFromUrl(jsCodeLocation: jsCodeLocation!)
 //        return
-//            
-            
+//
             
         self.href = publicUrl
         let url = getUrlInfo(url: publicUrl)
@@ -230,18 +230,24 @@ class RNCrossController: UIViewController {
   }
     
     func getUrlInfo(url: String) -> RNUrl {
-        let m = url.split(separator: "#").compactMap({ "\($0)" })
+        let m = url.split(separator: "?").compactMap({ "\($0)" })
         let publicUrl = m[0]
-        let search = m[1]
-        return RNUrl(search: search, publicUrl: publicUrl)
+        let search = "?" + m[1]
+        return RNUrl(search: search, publicUrl: publicUrl, path: "/")
     }
     
   
   func loadBundleFromUrl(jsCodeLocation: URL) {
+    let url = getUrlInfo(url: self.href)
+    let props = [
+        "publicUrl": url.publicUrl,
+        "path": url.path,
+        "search": url.search
+    ]
       let rootView = RCTRootView(
           bundleURL: jsCodeLocation,
           moduleName: moduleName,
-          initialProperties: nil,
+          initialProperties: props,
           launchOptions: nil
       )
       self.view = rootView
