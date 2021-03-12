@@ -53,7 +53,7 @@
     "husky": "^3.0.7",
     "lint-staged": "^9.4.0",
     "prettier": "^1.18.2",
-    "react-dev-utils": "^10.0.0",
+    "react-dev-utils": "^11.0.4",
     "react-docgen-typescript-loader": "^3.6.0",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
